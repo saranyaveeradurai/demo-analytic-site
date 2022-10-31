@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="all_main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <title>flipkart data</title>
+
+</head>
+
+<body onload="load()">
+    <div class="container">
+        <div class="left-table">
+            <ul>
+                <a href="./index.html">
+                    <li class='sidelist' >HOME PAGE</li>
+                </a>
+                <a href="./apple_main.html">
+                    <li class='sidelist' >Apple</li>
+                </a>
+                <a href="./honor_main.html">
+                    <li class='sidelist' >Honor</li>
+                </a>
+                <a href="./infinix_main.html">
+                    <li class='sidelist'>Infinix</li>
+                </a>
+                <a href="./mi_main.html">
+                    <li class='sidelist' >Mi</li>
+                </a>
+                <a href="./oppo_main.html">
+                    <li class='sidelist active1' >Oppo</li>
+                </a>
+                <a href="./poco_main.html">
+                    <li class='sidelist' >Poco</li>
+                </a>
+                <a href="./realme_main.html">
+                    <li class='sidelist' >Realme</li>
+                </a>
+                <a href="./samsung_main.html">
+                    <li class='sidelist' >Samsung</li>
+                </a>
+                <a href="./vivo_main.html">
+                    <li class='sidelist' >Vivo</li>
+                </a>
+            </ul>
+        </div>
+        <div class="right-table">
+            <div class="right-table-chart">
+                <div class="chartt">
+                <canvas id="priceChart" ></canvas>
+                <canvas id="launchStatusChart" ></canvas>
+                <canvas id="ratingChart" ></canvas>
+                </div>
+            </div>
+            <div class="right-table-table">
+                <table id="customers">
+                    <thead>
+                    <tr>
+                                        <th>TITLE</th>
+										<th>RAM OR ROM</th>
+										<th>DISPLAY</th>
+										<th>CAMERA</th>
+										<th>PROCESSOR</th>
+										<th>STAR RATING</th>
+										<th>TOTAL RATINGS</th>
+										<th>PRICE</th>
+										<th>IMG LINKS</th>
+										<th>LAUNCH STATUS</th>
+										<th>BUY</th>
+                    </tr>
+                </thead>
+                </table>
+            </div>
+            <div class="right-table-download">
+                    <a href="./oppo_main.html"><button>Below Rs.10000</button></a>
+                    <a href="./oppo_main_10k-25k.html"><button>Rs.10000-Rs.25000</button></a>
+                    <a href="./oppo_main_26k-50k.html"><button>Rs.26000-Rs.50000</button></a>
+                    <a href="./oppo_main_above_50k.html"><button>Above Rs.50000</button></a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script>
+        price ='[{"one": 32,"two": 258,"three": 41,"four": 4}]'
+        
+        var pricedata = JSON.parse(price);
+        for(var i = 0;i < pricedata.length; i++){
+            var xValues = ["<10k","10k-25k","26k-50k",">50k"]
+            var yValues = [pricedata[i].one,pricedata[i].two,pricedata[i].three,pricedata[i].four];
+            var barColors = ["#FF0000", "#FF4500", "#FF6347", "#FF7F50"];
+        
+            new Chart("priceChart", {
+                type: "bar",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Price"
+                }
+            }
+            });
+        }
+        
+        launch_status='[{"Coming_Soon": 82,"Available": 208}]'
+        var launchdata = JSON.parse(launch_status);
+        for(var i = 0;i < launchdata.length; i++){
+            var xValues = ["Coming_Soon","Available"]
+            var yValues = [launchdata[i].Coming_Soon,launchdata[i].Available];
+            var barColors = ["#FF0000", "#FF4500"];
+        
+            new Chart("launchStatusChart", {
+                type: "pie",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Launch status"
+                }
+            }
+            });
+        }
+        rating='[{"one": 6,"two": 275,"three": 7,"four": 2}]'
+        var ratingdata = JSON.parse(rating);
+        for(var i = 0;i < ratingdata.length; i++){
+            var xValues = [">=4.6","4.1 to 4.5","3.6 to 4.0","<=3.5"]
+            var yValues = [ratingdata[i].one,ratingdata[i].two,ratingdata[i].three,ratingdata[i].four];
+            var barColors = ["#FF0000", "#FF4500", "#FF6347", "#FF7F50"];
+        
+            new Chart("ratingChart", {
+                type: "line",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Rating"
+                }
+            }
+            });
+        }
+        </script>
+        <script type="text/javascript">
+        
+            function load() {
+data='[{"Title":"OPPO A16E (Midnight Black, 64 GB)","Ram or Rom":"4 GB RAM | 64 GB ROM | Expandable Upto 1 TB","Display":" 16.56 cm (6.52 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.2,"Total Rating":"937 Ratings & 45 Reviews","Price":9999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l12h1u80\/mobile\/i\/v\/x\/-original-imagcq2qkvz8ddp6.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a16e-midnight-black-64-gb\/p\/itm85a06b75b1e08?pid=MOBGCNHPWPGUYYZJ&lid=LSTMOBGCNHPWPGUYYZJXMORC4&marketplace=FLIPKART&store=tyy%2F4io&srno=b_2_27&otracker=CLP_filters&fm=organic&iid=24026ffa-556e-4dbf-824a-d639c8ab5612.MOBGCNHPWPGUYYZJ.SEARCH&ppt=None&ppn=None&ssid=4y7sz65pqo0000001666100484315"},{"Title":"OPPO A16k (Blue, 64 GB)","Ram or Rom":"4 GB RAM | 64 GB ROM | Expandable Upto 1 TB","Display":" 16.56 cm (6.52 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.2,"Total Rating":"426 Ratings & 29 Reviews","Price":9999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kyg5zm80\/mobile\/b\/g\/t\/-original-imagazh63wbgwcxw.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a16k-blue-64-gb\/p\/itmc4f804c2f1190?pid=MOBGAGNZQMDMUHHE&lid=LSTMOBGAGNZQMDMUHHEMRMA51&marketplace=FLIPKART&store=tyy%2F4io&srno=b_2_35&otracker=CLP_filters&fm=organic&iid=24026ffa-556e-4dbf-824a-d639c8ab5612.MOBGAGNZQMDMUHHE.SEARCH&ppt=None&ppn=None&ssid=4y7sz65pqo0000001666100484315"},{"Title":"OPPO A16E (White, 64 GB)","Ram or Rom":"4 GB RAM | 64 GB ROM | Expandable Upto 1 TB","Display":" 16.56 cm (6.52 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.2,"Total Rating":"937 Ratings & 45 Reviews","Price":9999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l12h1u80\/mobile\/h\/m\/8\/-original-imagcq2qpgx6nhet.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a16e-white-64-gb\/p\/itm85a06b75b1e08?pid=MOBGCNHPZCJMEHBH&lid=LSTMOBGCNHPZCJMEHBHJK77SY&marketplace=FLIPKART&store=tyy%2F4io&srno=b_2_46&otracker=CLP_filters&fm=organic&iid=24026ffa-556e-4dbf-824a-d639c8ab5612.MOBGCNHPZCJMEHBH.SEARCH&ppt=None&ppn=None&ssid=4y7sz65pqo0000001666100484315"},{"Title":"OPPO A16E (Blue, 64 GB)","Ram or Rom":"4 GB RAM | 64 GB ROM | Expandable Upto 1 TB","Display":" 16.56 cm (6.52 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.2,"Total Rating":"921 Ratings & 45 Reviews","Price":9999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l12h1u80\/mobile\/o\/n\/o\/-original-imagcq2qq6mjczsd.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a16e-blue-64-gb\/p\/itm85a06b75b1e08?pid=MOBGCNHP2TBYJE7U&lid=LSTMOBGCNHP2TBYJE7UT9NI4K&marketplace=FLIPKART&store=tyy%2F4io&srno=b_1_16&otracker=CLP_filters&fm=organic&iid=5fd3db9a-2a08-434d-ab6e-3394e2d1b54c.MOBGCNHP2TBYJE7U.SEARCH&ppt=None&ppn=None&ssid=stc76ch4o00000001666100470271"},{"Title":"OPPO A16k (White, 64 GB)","Ram or Rom":"4 GB RAM | 64 GB ROM | Expandable Upto 1 TB","Display":" 16.56 cm (6.52 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.2,"Total Rating":"424 Ratings & 28 Reviews","Price":9999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kyg5zm80\/mobile\/n\/y\/9\/-original-imagazh6fmxqpc4m.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a16k-white-64-gb\/p\/itmc4f804c2f1190?pid=MOBGAGNZWHKZRJGZ&lid=LSTMOBGAGNZWHKZRJGZUBFRPJ&marketplace=FLIPKART&store=tyy%2F4io&srno=b_5_104&otracker=CLP_filters&fm=organic&iid=75c5096f-70ef-481a-a2df-8acf10459778.MOBGAGNZWHKZRJGZ.SEARCH&ppt=None&ppn=None&ssid=j7h2ba8qn40000001666100583916"},{"Title":"OPPO A15 (Rainbow Silver, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM","Display":" 16.56 cm (6.52 inch) Display","Camera":" 13MP Rear Camera","Processor":" 4230 mAh Battery","Star Rating":4.3,"Total Rating":"1,941 Ratings & 112 Reviews","Price":9990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/klgx0280\/mobile\/5\/h\/o\/a15-cph2185-oppo-original-imagyh8jk8gyqvqp.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a15-rainbow-silver-32-gb\/p\/itm227feb7ae22b8?pid=MOBGYH8KW6NX7QBS&lid=LSTMOBGYH8KW6NX7QBSELY0UM&marketplace=FLIPKART&store=tyy%2F4io&srno=b_9_193&otracker=CLP_filters&fm=organic&iid=92d7cbb2-2f49-4ee6-8f38-b53e26ca6b17.MOBGYH8KW6NX7QBS.SEARCH&ppt=None&ppn=None&ssid=dukbmz4ge80000001666100637045"},{"Title":"OPPO A83 (Red, 16 GB)","Ram or Rom":"2 GB RAM | 16 GB ROM | Expandable Upto 256 GB","Display":" 14.48 cm (5.7 inch) HD Display","Camera":" 13MP Rear Camera | 8MP Front Camera","Processor":" 3180 mAh Battery","Star Rating":4.2,"Total Rating":"373 Ratings & 37 Reviews","Price":9990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/joynde80\/mobile\/9\/u\/w\/oppo-a83-cph1827-original-imafbbfetwkb55mn.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a83-red-16-gb\/p\/itmfawnctfqfgxtj?pid=MOBFAWNCSZRKW9UW&lid=LSTMOBFAWNCSZRKW9UWOW7CUC&marketplace=FLIPKART&store=tyy%2F4io&srno=b_9_207&otracker=CLP_filters&fm=organic&iid=92d7cbb2-2f49-4ee6-8f38-b53e26ca6b17.MOBFAWNCSZRKW9UW.SEARCH&ppt=None&ppn=None&ssid=dukbmz4ge80000001666100637045"},{"Title":"OPPO A12 (Deep Blue, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 256 GB","Display":" 15.8 cm (6.22 inch) HD+ Display","Camera":" 13MP + 2MP | 5MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.4,"Total Rating":"74,401 Ratings & 4,483 Reviews","Price":9990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kjx6tu80\/mobile\/c\/e\/8\/oppo-a12-cph2083-original-imafze3h8d7n7jnh.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a12-deep-blue-32-gb\/p\/itmfc859cdf39e01?pid=MOBFZCPFHAT4RCE8&lid=LSTMOBFZCPFHAT4RCE8CIDDGJ&marketplace=FLIPKART&store=tyy%2F4io&srno=b_4_85&otracker=CLP_filters&fm=organic&iid=4215aec0-fe47-4eb2-9fc0-d49afecb215b.MOBFZCPFHAT4RCE8.SEARCH&ppt=None&ppn=None&ssid=huxor5powg0000001666100571543"},{"Title":"OPPO A83 (Champagne, 16 GB)","Ram or Rom":"2 GB RAM | 16 GB ROM | Expandable Upto 256 GB","Display":" 14.48 cm (5.7 inch) HD Display","Camera":" 13MP Rear Camera | 8MP Front Camera","Processor":" 3180 mAh Battery","Star Rating":4.2,"Total Rating":"373 Ratings & 37 Reviews","Price":9990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/joynde80\/mobile\/m\/r\/d\/oppo-a83-cph1827-original-imafbbfe5cgsazqu.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a83-champagne-16-gb\/p\/itmfawnctfqfgxtj?pid=MOBFAWNCGKHSEMRD&lid=LSTMOBFAWNCGKHSEMRDI2YZKE&marketplace=FLIPKART&store=tyy%2F4io&srno=b_12_274&otracker=CLP_filters&fm=organic&iid=4d179abb-5712-422e-945e-272971bd0c89.MOBFAWNCGKHSEMRD.SEARCH&ppt=None&ppn=None&ssid=s8br7eg3j40000001666100686986"},{"Title":"OPPO A12 (Blue, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 256 GB","Display":" 15.8 cm (6.22 inch) HD+ Display","Camera":" 13MP + 2MP | 5MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.4,"Total Rating":"74,401 Ratings & 4,483 Reviews","Price":9990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kb1470w0\/mobile\/q\/g\/g\/oppo-a12-cph2083-original-imafsh2hfkyamqyt.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a12-blue-32-gb\/p\/itmfc859cdf39e01?pid=MOBFSDDJUUE7MQGG&lid=LSTMOBFSDDJUUE7MQGGZKZAWH&marketplace=FLIPKART&store=tyy%2F4io&srno=b_4_77&otracker=CLP_filters&fm=organic&iid=4215aec0-fe47-4eb2-9fc0-d49afecb215b.MOBFSDDJUUE7MQGG.SEARCH&ppt=None&ppn=None&ssid=huxor5powg0000001666100571543"},{"Title":"OPPO F1S (Gold, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 128 GB","Display":" 13.97 cm (5.5 inch) HD Display","Camera":" 13MP Rear Camera | 16MP Front Camera","Processor":" 3075 mAh Battery","Star Rating":4.1,"Total Rating":"3,545 Ratings & 952 Reviews","Price":9990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/e\/f\/7\/oppo-f1s-a1601-original-imaemcaxkt5hvhfr.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-f1s-gold-32-gb\/p\/itmehcwevtzgv5ft?pid=MOBEHCWECYGB3EF7&lid=LSTMOBEHCWECYGB3EF7ATSNZO&marketplace=FLIPKART&store=tyy%2F4io&srno=b_12_287&otracker=CLP_filters&fm=organic&iid=4d179abb-5712-422e-945e-272971bd0c89.MOBEHCWECYGB3EF7.SEARCH&ppt=None&ppn=None&ssid=s8br7eg3j40000001666100686986"},{"Title":"OPPO A12 (Black, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 256 GB","Display":" 15.8 cm (6.22 inch) HD+ Display","Camera":" 13MP + 2MP | 5MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.4,"Total Rating":"74,401 Ratings & 4,483 Reviews","Price":9990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kb1470w0\/mobile\/6\/r\/s\/oppo-a12-cph2083-original-imafsh2hvz4f2sa5.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a12-black-32-gb\/p\/itmfc859cdf39e01?pid=MOBFSDDJSMYQY6RS&lid=LSTMOBFSDDJSMYQY6RSCQ8BHN&marketplace=FLIPKART&store=tyy%2F4io&srno=b_5_99&otracker=CLP_filters&fm=organic&iid=75c5096f-70ef-481a-a2df-8acf10459778.MOBFSDDJSMYQY6RS.SEARCH&ppt=None&ppn=None&ssid=j7h2ba8qn40000001666100583916"},{"Title":"OPPO A5s (Black, 32 GB)","Ram or Rom":"2 GB RAM | 32 GB ROM | Expandable Upto 256 GB","Display":" 15.75 cm (6.2 inch) HD+ Display","Camera":" 13MP + 2MP | 8MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.3,"Total Rating":"33,948 Ratings & 2,456 Reviews","Price":9799,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/k2jbyq80pkrrdj\/mobile-refurbished\/a\/j\/j\/a5s-32-b-cph1909-oppo-2-original-imaffmvugunustek.jpeg?q=70","Launch Status":"Coming Soon","Buy":"https:\/\/www.flipkart.com\/oppo-a5s-black-32-gb\/p\/itmffhgzsqaczrn4?pid=MOBFFHGZ56TVRDZW&lid=LSTMOBFFHGZ56TVRDZW6B62EO&marketplace=FLIPKART&store=tyy%2F4io&srno=b_7_167&otracker=CLP_filters&fm=organic&iid=e87ef7ef-626c-4abd-995e-fe7dc829098e.MOBFFHGZ56TVRDZW.SEARCH&ppt=None&ppn=None&ssid=v08hugyqpc0000001666100606754"},{"Title":"OPPO A16k (Blue, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 1 TB","Display":" 16.56 cm (6.52 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.3,"Total Rating":"574 Ratings & 35 Reviews","Price":9689,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kyg5zm80\/mobile\/b\/g\/t\/-original-imagazh63wbgwcxw.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a16k-blue-32-gb\/p\/itmc4f804c2f1190?pid=MOBGAGNZABB4ZKZN&lid=LSTMOBGAGNZABB4ZKZND0FJPT&marketplace=FLIPKART&store=tyy%2F4io&srno=b_3_67&otracker=CLP_filters&fm=organic&iid=cef40b85-ad87-4894-8c33-b7d83df338ea.MOBGAGNZABB4ZKZN.SEARCH&ppt=None&ppn=None&ssid=9t209gturk0000001666100559139"},{"Title":"OPPO A16E (Midnight Black, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 1 TB","Display":" 16.56 cm (6.52 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.3,"Total Rating":"313 Ratings & 11 Reviews","Price":9490,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l12h1u80\/mobile\/i\/v\/x\/-original-imagcq2qkvz8ddp6.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a16e-midnight-black-32-gb\/p\/itm85a06b75b1e08?pid=MOBGCNHPSJHEJQZZ&lid=LSTMOBGCNHPSJHEJQZZ1WLTMN&marketplace=FLIPKART&store=tyy%2F4io&srno=b_2_26&otracker=CLP_filters&fm=organic&iid=24026ffa-556e-4dbf-824a-d639c8ab5612.MOBGCNHPSJHEJQZZ.SEARCH&ppt=None&ppn=None&ssid=4y7sz65pqo0000001666100484315"},{"Title":"OPPO A16E (Blue, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 1 TB","Display":" 16.56 cm (6.52 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.3,"Total Rating":"310 Ratings & 11 Reviews","Price":9490,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l12h1u80\/mobile\/o\/n\/o\/-original-imagcq2qq6mjczsd.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a16e-blue-32-gb\/p\/itm85a06b75b1e08?pid=MOBGCNHPNPBEFUZD&lid=LSTMOBGCNHPNPBEFUZDYLEPNU&marketplace=FLIPKART&store=tyy%2F4io&srno=b_1_11&otracker=CLP_filters&fm=organic&iid=5fd3db9a-2a08-434d-ab6e-3394e2d1b54c.MOBGCNHPNPBEFUZD.SEARCH&ppt=None&ppn=None&ssid=stc76ch4o00000001666100470271"},{"Title":"OPPO A16E (White, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 1 TB","Display":" 16.56 cm (6.52 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.3,"Total Rating":"310 Ratings & 11 Reviews","Price":9490,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l12h1u80\/mobile\/h\/m\/8\/-original-imagcq2qpgx6nhet.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a16e-white-32-gb\/p\/itm85a06b75b1e08?pid=MOBGCNHPFUD7NYRZ&lid=LSTMOBGCNHPFUD7NYRZLXAVI5&marketplace=FLIPKART&store=tyy%2F4io&srno=b_1_17&otracker=CLP_filters&fm=organic&iid=5fd3db9a-2a08-434d-ab6e-3394e2d1b54c.MOBGCNHPFUD7NYRZ.SEARCH&ppt=None&ppn=None&ssid=stc76ch4o00000001666100470271"},{"Title":"OPPO A16k (Black, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 1 TB","Display":" 16.56 cm (6.52 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.3,"Total Rating":"574 Ratings & 35 Reviews","Price":9490,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kyg5zm80\/mobile\/7\/q\/r\/-original-imagazh6zbafgv8u.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a16k-black-32-gb\/p\/itmc4f804c2f1190?pid=MOBGAGNZADFMEMSJ&lid=LSTMOBGAGNZADFMEMSJYRJZMX&marketplace=FLIPKART&store=tyy%2F4io&srno=b_9_211&otracker=CLP_filters&fm=organic&iid=92d7cbb2-2f49-4ee6-8f38-b53e26ca6b17.MOBGAGNZADFMEMSJ.SEARCH&ppt=None&ppn=None&ssid=dukbmz4ge80000001666100637045"},{"Title":"OPPO A16k (White, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 1 TB","Display":" 16.56 cm (6.52 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.3,"Total Rating":"576 Ratings & 35 Reviews","Price":9490,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kyg5zm80\/mobile\/n\/y\/9\/-original-imagazh6fmxqpc4m.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a16k-white-32-gb\/p\/itmc4f804c2f1190?pid=MOBGAGNZPZBTJ6BE&lid=LSTMOBGAGNZPZBTJ6BEL4BRFS&marketplace=FLIPKART&store=tyy%2F4io&srno=b_2_47&otracker=CLP_filters&fm=organic&iid=24026ffa-556e-4dbf-824a-d639c8ab5612.MOBGAGNZPZBTJ6BE.SEARCH&ppt=None&ppn=None&ssid=4y7sz65pqo0000001666100484315"},{"Title":"OPPO A16k (Midnight Black, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 1 TB","Display":" 16.56 cm (6.52 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.3,"Total Rating":"574 Ratings & 35 Reviews","Price":9250,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kyg5zm80\/mobile\/p\/q\/u\/-original-imagazh6zxhyadaf.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a16k-midnight-black-32-gb\/p\/itmc4f804c2f1190?pid=MOBGAGNZHGQ8H5WF&lid=LSTMOBGAGNZHGQ8H5WFCOJE0T&marketplace=FLIPKART&store=tyy%2F4io&srno=b_4_74&otracker=CLP_filters&fm=organic&iid=4215aec0-fe47-4eb2-9fc0-d49afecb215b.MOBGAGNZHGQ8H5WF.SEARCH&ppt=None&ppn=None&ssid=huxor5powg0000001666100571543"},{"Title":"OPPO A3s (Red, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 256 GB","Display":" 15.75 cm (6.2 inch) HD+ Display","Camera":" 13MP + 2MP | 8MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.4,"Total Rating":"26,970 Ratings & 2,026 Reviews","Price":8926,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/jovshow0\/mobile\/n\/n\/n\/oppo-a3s-cph1803-original-imaf9f33wkwhbfxf.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a3s-red-32-gb\/p\/itmf7fnvj5bgww6r?pid=MOBF7MV6NYPTKNNN&lid=LSTMOBF7MV6NYPTKNNNQPXSXW&marketplace=FLIPKART&store=tyy%2F4io&srno=b_11_252&otracker=CLP_filters&fm=organic&iid=7051c7a0-7de9-4141-8ea9-9129713cf727.MOBF7MV6NYPTKNNN.SEARCH&ppt=None&ppn=None&ssid=bb2k9wblj40000001666100672910"},{"Title":"OPPO A3s (Purple, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 256 GB","Display":" 15.75 cm (6.2 inch) HD+ Display","Camera":" 13MP + 2MP | 8MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.4,"Total Rating":"26,970 Ratings & 2,026 Reviews","Price":8899,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/jovshow0\/mobile\/c\/j\/f\/oppo-a3s-cph1803-original-imaf9f37bvpypwdg.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a3s-purple-32-gb\/p\/itmf7fnvj5bgww6r?pid=MOBF7MV6VEXM7CJF&lid=LSTMOBF7MV6VEXM7CJFJLZDAH&marketplace=FLIPKART&store=tyy%2F4io&srno=b_8_190&otracker=CLP_filters&fm=organic&iid=fe335faf-82c9-425d-b61c-56d51d57529a.MOBF7MV6VEXM7CJF.SEARCH&ppt=None&ppn=None&ssid=ipkq9r7vhc0000001666100617309"},{"Title":"OPPO A5s (Blue, 32 GB)","Ram or Rom":"2 GB RAM | 32 GB ROM | Expandable Upto 256 GB","Display":" 15.75 cm (6.2 inch) HD+ Display","Camera":" 13MP + 2MP | 8MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.3,"Total Rating":"33,948 Ratings & 2,456 Reviews","Price":8847,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/k2jbyq80pkrrdj\/mobile-refurbished\/8\/f\/x\/a5s-32-a-cph1909-oppo-2-original-imafggzyxwv5dwg6.jpeg?q=70","Launch Status":"Coming Soon","Buy":"https:\/\/www.flipkart.com\/oppo-a5s-blue-32-gb\/p\/itmffhgzsqaczrn4?pid=MOBFGHYFHHRNZAZF&lid=LSTMOBFGHYFHHRNZAZFYOVTB9&marketplace=FLIPKART&store=tyy%2F4io&srno=b_7_168&otracker=CLP_filters&fm=organic&iid=e87ef7ef-626c-4abd-995e-fe7dc829098e.MOBFGHYFHHRNZAZF.SEARCH&ppt=None&ppn=None&ssid=v08hugyqpc0000001666100606754"},{"Title":"OPPO Neo 7 4G (Black, 16 GB)","Ram or Rom":"1 GB RAM | 16 GB ROM | Expandable Upto 32 GB","Display":" 12.7 cm (5 inch) HD Display","Camera":" 8MP Rear Camera | 5MP Front Camera","Processor":" 2420 mAh Battery","Star Rating":3.9,"Total Rating":"2,145 Ratings & 459 Reviews","Price":8000,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/3\/a\/k\/oppo-neo-7-4g-a33f-original-imaehzsvhphgrnwu.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-neo-7-4g-black-16-gb\/p\/itmecrthsbp2mkzt?pid=MOBEDFHCGBZHJ3AK&lid=LSTMOBEDFHCGBZHJ3AKT5ENLF&marketplace=FLIPKART&store=tyy%2F4io&srno=b_12_282&otracker=CLP_filters&fm=organic&iid=4d179abb-5712-422e-945e-272971bd0c89.MOBEDFHCGBZHJ3AK.SEARCH&ppt=None&ppn=None&ssid=s8br7eg3j40000001666100686986"},{"Title":"OPPO A1K (Red, 32 GB)","Ram or Rom":"2 GB RAM | 32 GB ROM | Expandable Upto 256 GB","Display":" 15.49 cm (6.1 inch) Display","Camera":" 8MP Rear Camera | 5MP Front Camera","Processor":" 4000 mAh Li-polymer Battery","Star Rating":4.3,"Total Rating":"14,085 Ratings & 883 Reviews","Price":7999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/k2jbyq80pkrrdj\/mobile-refurbished\/m\/w\/z\/a1k-32-b-cph1923-oppo-2-original-imafg2hqnxx3kntn.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a1k-red-32-gb\/p\/itmffvzfgyghr6h6?pid=MOBFFVZYG7SHU22Z&lid=LSTMOBFFVZYG7SHU22ZH76520&marketplace=FLIPKART&store=tyy%2F4io&srno=b_8_179&otracker=CLP_filters&fm=organic&iid=fe335faf-82c9-425d-b61c-56d51d57529a.MOBFFVZYG7SHU22Z.SEARCH&ppt=None&ppn=None&ssid=ipkq9r7vhc0000001666100617309"},{"Title":"OPPO A1K (Black, 32 GB)","Ram or Rom":"2 GB RAM | 32 GB ROM | Expandable Upto 256 GB","Display":" 15.49 cm (6.1 inch) Display","Camera":" 8MP Rear Camera | 5MP Front Camera","Processor":" 4000 mAh Li-polymer Battery","Star Rating":4.3,"Total Rating":"14,085 Ratings & 883 Reviews","Price":7999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/k2jbyq80pkrrdj\/mobile-refurbished\/s\/r\/h\/a1k-32-b-cph1923-oppo-2-original-imafg2hqxnzrujtq.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a1k-black-32-gb\/p\/itmffvzfgyghr6h6?pid=MOBFFVZYYZHA6B4T&lid=LSTMOBFFVZYYZHA6B4TX8OSV2&marketplace=FLIPKART&store=tyy%2F4io&srno=b_8_186&otracker=CLP_filters&fm=organic&iid=fe335faf-82c9-425d-b61c-56d51d57529a.MOBFFVZYYZHA6B4T.SEARCH&ppt=None&ppn=None&ssid=ipkq9r7vhc0000001666100617309"},{"Title":"OPPO A11K (Flowing Silver, 32 GB)","Ram or Rom":"2 GB RAM | 32 GB ROM | Expandable Upto 256 GB","Display":" 15.8 cm (6.22 inch) HD+ Display","Camera":" 13MP + 2MP | 5MP Front Camera","Processor":" 4230 mAh Li-polymer Battery","Star Rating":4.2,"Total Rating":"7,192 Ratings & 524 Reviews","Price":7990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kbs9k7k0\/mobile\/s\/k\/2\/oppo-a11k-cph2083-original-imaft25bhg9f3k2f.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a11k-flowing-silver-32-gb\/p\/itm2d16676f7a6e9?pid=MOBFTYWWANGZZSK2&lid=LSTMOBFTYWWANGZZSK2WZDRJ4&marketplace=FLIPKART&store=tyy%2F4io&srno=b_8_174&otracker=CLP_filters&fm=organic&iid=fe335faf-82c9-425d-b61c-56d51d57529a.MOBFTYWWANGZZSK2.SEARCH&ppt=None&ppn=None&ssid=ipkq9r7vhc0000001666100617309"},{"Title":"OPPO A11K (Deep Blue, 32 GB)","Ram or Rom":"2 GB RAM | 32 GB ROM | Expandable Upto 256 GB","Display":" 15.8 cm (6.22 inch) HD+ Display","Camera":" 13MP + 2MP | 5MP Front Camera","Processor":" 4230 mAh Li-polymer Battery","Star Rating":4.2,"Total Rating":"7,192 Ratings & 524 Reviews","Price":7990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kbs9k7k0\/mobile\/z\/6\/g\/oppo-a11k-cph2083-original-imaft25bzadyfstj.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a11k-deep-blue-32-gb\/p\/itm2d16676f7a6e9?pid=MOBFTYWW3YYTFZ6G&lid=LSTMOBFTYWW3YYTFZ6GNZGB7U&marketplace=FLIPKART&store=tyy%2F4io&srno=b_10_220&otracker=CLP_filters&fm=organic&iid=bbebec62-ef2f-426f-8bba-a078f3c24938.MOBFTYWW3YYTFZ6G.SEARCH&ppt=None&ppn=None&ssid=0kumkrkwj40000001666100649260"},{"Title":"OPPO A3s (Red, 16 GB)","Ram or Rom":"2 GB RAM | 16 GB ROM | Expandable Upto 256 GB","Display":" 15.75 cm (6.2 inch) HD+ Display","Camera":" 13MP + 2MP | 8MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.4,"Total Rating":"29,456 Ratings & 2,396 Reviews","Price":7441,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/jovshow0\/mobile\/s\/z\/k\/oppo-a3s-cph1803-original-imaf9f38zyrnszxy.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a3s-red-16-gb\/p\/itmfcmuvhzthsyzw?pid=MOBF7FNVWXNGRSZK&lid=LSTMOBF7FNVWXNGRSZKOV3EHX&marketplace=FLIPKART&store=tyy%2F4io&srno=b_13_291&otracker=CLP_filters&fm=organic&iid=86d19f60-b6ca-4661-9a84-c726d70107c3.MOBF7FNVWXNGRSZK.SEARCH&ppt=None&ppn=None&ssid=i5j7yom0cw0000001666100698179"},{"Title":"OPPO A3s (Purple, 16 GB)","Ram or Rom":"2 GB RAM | 16 GB ROM | Expandable Upto 256 GB","Display":" 15.75 cm (6.2 inch) HD+ Display","Camera":" 13MP + 2MP | 8MP Front Camera","Processor":" 4230 mAh Battery","Star Rating":4.4,"Total Rating":"29,456 Ratings & 2,396 Reviews","Price":7399,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/jovshow0\/mobile\/s\/q\/4\/oppo-a3s-cph1803-original-imaf9f39bqcvhpg2.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-a3s-purple-16-gb\/p\/itmfcmuvhzthsyzw?pid=MOBF7FNVH5QGESQ4&lid=LSTMOBF7FNVH5QGESQ4ZCZXI1&marketplace=FLIPKART&store=tyy%2F4io&srno=b_9_194&otracker=CLP_filters&fm=organic&iid=92d7cbb2-2f49-4ee6-8f38-b53e26ca6b17.MOBF7FNVH5QGESQ4.SEARCH&ppt=None&ppn=None&ssid=dukbmz4ge80000001666100637045"},{"Title":"OPPO Neo 5 (Black, 16 GB)","Ram or Rom":"1 GB RAM | 16 GB ROM","Display":" 11.43 cm (4.5 inch) FWVGA Display","Camera":" 8MP Rear Camera","Processor":" 2000 mAh Battery","Star Rating":3.8,"Total Rating":"485 Ratings & 82 Reviews","Price":4999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/z\/2\/d\/oppo-neo-5-oppo-1201-original-imaepgpatrythcd5.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-neo-5-black-16-gb\/p\/itmehz99scmvy9fh?pid=MOBEHZ99W9HCNZ2D&lid=LSTMOBEHZ99W9HCNZ2DVMBASY&marketplace=FLIPKART&store=tyy%2F4io&srno=b_12_265&otracker=CLP_filters&fm=organic&iid=4d179abb-5712-422e-945e-272971bd0c89.MOBEHZ99W9HCNZ2D.SEARCH&ppt=None&ppn=None&ssid=s8br7eg3j40000001666100686986"},{"Title":"OPPO Neo 5 (White, 16 GB)","Ram or Rom":"1 GB RAM | 16 GB ROM","Display":" 11.43 cm (4.5 inch) FWVGA Display","Camera":" 8MP Rear Camera","Processor":" 2000 mAh Battery","Star Rating":3.8,"Total Rating":"485 Ratings & 82 Reviews","Price":4999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/w\/2\/h\/oppo-neo-5-5-original-imaegpzffgzdffyr.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-neo-5-white-16-gb\/p\/itmehf9xzqq5cdgr?pid=MOBEHF9XYVQMBW2H&lid=LSTMOBEHF9XYVQMBW2HCEDR9C&marketplace=FLIPKART&store=tyy%2F4io&srno=b_10_232&otracker=CLP_filters&fm=organic&iid=bbebec62-ef2f-426f-8bba-a078f3c24938.MOBEHF9XYVQMBW2H.SEARCH&ppt=None&ppn=None&ssid=0kumkrkwj40000001666100649260"}]';
+                var mydata = JSON.parse(data);
+                var div = document.getElementById('customers');
+                for(var i = 0;i < mydata.length; i++){
+                    div.innerHTML = div.innerHTML + "<tr><td>"+ mydata[i].Title +"</td>"+
+                                                        "<td>"+ mydata[i]['Ram or Rom'] +"</td>"+
+                                                        "<td>"+ mydata[i].Display +"</td>"+
+                                                        "<td>"+ mydata[i].Camera +"</td>"+
+                                                        "<td>"+ mydata[i].Processor +"</td>"+
+                                                        "<td>"+ mydata[i]['Star Rating']+"</td>"+
+                                                        "<td>"+ mydata[i]['Total Rating']+"</td>"+
+                                                        "<td>"+ mydata[i].Price +"</td>"+
+                                                        "<td><a href="+mydata[i]['Img Url']+">"+ 'Image_Url'+"</a></td>"+
+                                                        "<td>"+ mydata[i]['Launch Status'] +"</td>"+
+                                                        "<td><a href="+mydata[i].Buy+" target='__blank'>"+ 'Buy_Url'+"</a></td>"+
+                                                    "</tr>";
+                }
+            }
+        </script>
+</body>
+</html>

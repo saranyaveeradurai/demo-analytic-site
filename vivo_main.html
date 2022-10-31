@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="all_main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <title>flipkart data</title>
+
+</head>
+
+<body onload="load()">
+    <div class="container">
+        <div class="left-table">
+            <ul>
+                <a href="./index.html">
+                    <li class='sidelist' >HOME PAGE</li>
+                </a>
+                <a href="./apple_main.html">
+                    <li class='sidelist' >Apple</li>
+                </a>
+                <a href="./honor_main.html">
+                    <li class='sidelist' >Honor</li>
+                </a>
+                <a href="./infinix_main.html">
+                    <li class='sidelist'>Infinix</li>
+                </a>
+                <a href="./mi_main.html">
+                    <li class='sidelist' >Mi</li>
+                </a>
+                <a href="./oppo_main.html">
+                    <li class='sidelist' >Oppo</li>
+                </a>
+                <a href="./poco_main.html">
+                    <li class='sidelist' >Poco</li>
+                </a>
+                <a href="./realme_main.html">
+                    <li class='sidelist' >Realme</li>
+                </a>
+                <a href="./samsung_main.html">
+                    <li class='sidelist ' >Samsung</li>
+                </a>
+                <a href="./vivo_main.html">
+                    <li class='sidelist active1' >Vivo</li>
+                </a>
+            </ul>
+        </div>
+        <div class="right-table">
+            <div class="right-table-chart">
+                <div class="chartt">
+                <canvas id="priceChart" ></canvas>
+                <canvas id="launchStatusChart" ></canvas>
+                <canvas id="ratingChart" ></canvas>
+                </div>
+            </div>
+            <div class="right-table-table">
+                <table id="customers">
+                    <thead>
+                    <tr>
+                                        <th>TITLE</th>
+										<th>RAM OR ROM</th>
+										<th>DISPLAY</th>
+										<th>CAMERA</th>
+										<th>PROCESSOR</th>
+										<th>STAR RATING</th>
+										<th>TOTAL RATINGS</th>
+										<th>PRICE</th>
+										<th>IMG LINKS</th>
+										<th>LAUNCH STATUS</th>
+										<th>BUY</th>
+                    </tr>
+                </thead>
+                </table>
+            </div>
+            <div class="right-table-download">
+                <a href="./vivo_main.html"><button>Below Rs.10000</button></a>
+                <a href="./vivo_main_10k-25k.html"><button>Rs.10000-Rs.25000</button></a>
+                <a href="./vivo_main_26k-50k.html"><button>Rs.26000-Rs.50000</button></a>
+                <a href="./vivo_main_above_50k.html"><button>Above Rs.50000</button></a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script>
+        price ='[{"one": 23,"two": 183,"three": 45,"four": 15}]'
+        
+        var pricedata = JSON.parse(price);
+        for(var i = 0;i < pricedata.length; i++){
+            var xValues = ["<10k","10k-25k","26k-50k",">50k"]
+            var yValues = [pricedata[i].one,pricedata[i].two,pricedata[i].three,pricedata[i].four];
+            var barColors = ["#FF0000", "#FF4500", "#FF6347", "#FF7F50"];
+        
+            new Chart("priceChart", {
+                type: "bar",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Price"
+                }
+            }
+            });
+        }
+        
+        launch_status='[{"Coming_Soon": 19,"Available": 187}]'
+        var launchdata = JSON.parse(launch_status);
+        for(var i = 0;i < launchdata.length; i++){
+            var xValues = ["Coming_Soon","Available"]
+            var yValues = [launchdata[i].Coming_Soon,launchdata[i].Available];
+            var barColors = ["#FF0000", "#FF4500"];
+        
+            new Chart("launchStatusChart", {
+                type: "pie",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Launch status"
+                }
+            }
+            });
+        }
+        rating='[{"one": 1,"two": 202,"three": 3,"four": 0}]'
+        var ratingdata = JSON.parse(rating);
+        for(var i = 0;i < ratingdata.length; i++){
+            var xValues = [">=4.6","4.1 to 4.5","3.6 to 4.0","<=3.5"]
+            var yValues = [ratingdata[i].one,ratingdata[i].two,ratingdata[i].three,ratingdata[i].four];
+            var barColors = ["#FF0000", "#FF4500", "#FF6347", "#FF7F50"];
+        
+            new Chart("ratingChart", {
+                type: "line",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Rating"
+                }
+            }
+            });
+        }
+        </script>
+        <script type="text/javascript">
+        
+            function load() {
+data='[{"Title":"vivo Y16 (Steller Black, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 1 TB","Display":" 16.54 cm (6.51 inch) HD+ Display","Camera":" 13MP + 2MP | 5MP Front Camera","Processor":" 5000 mAh Lithium Battery","Star Rating":4.3,"Total Rating":"32 Ratings & 1 Reviews","Price":9999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/xif0q\/mobile\/j\/v\/z\/-original-imaggcerjgnshnyw.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y16-steller-black-32-gb\/p\/itm72f3a9786718b?pid=MOBGHV2F3ZEDRKQA&lid=LSTMOBGHV2F3ZEDRKQA29UXB6&marketplace=FLIPKART&store=tyy%2F4io&srno=b_2_35&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=dac1b38a-a28b-445c-a24b-6e92ccdb0325.MOBGHV2F3ZEDRKQA.SEARCH&ppt=None&ppn=None&ssid=azvj47amcw0000001666103042909"},{"Title":"vivo Y53 (Matte Black, 16 GB)","Ram or Rom":"2 GB RAM | 16 GB ROM | Expandable Upto 256 GB","Display":" 12.7 cm (5 inch) quarter HD Display","Camera":" 8MP Rear Camera | 5MP Front Camera","Processor":" 2500 mAh Li-Ion Battery","Star Rating":4.2,"Total Rating":"6,051 Ratings & 802 Reviews","Price":9990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/j2rw87k0\/mobile\/f\/b\/y\/vivo-y53-1606-original-imaeufzqg5mqqeyv.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y53-matte-black-16-gb\/p\/itmeuydacv5q9kpz?pid=MOBEUFZG2NQJTFBY&lid=LSTMOBEUFZG2NQJTFBYZNLEZL&marketplace=FLIPKART&store=tyy%2F4io&srno=b_9_208&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=042ed048-bc24-4b07-aff9-b5a4785aec5b.MOBEUFZG2NQJTFBY.SEARCH&ppt=None&ppn=None&ssid=4dj8hiy7gg0000001666103116338"},{"Title":"vivo Y53 (Matte Black, 16 GB)","Ram or Rom":"2 GB RAM | 16 GB ROM | Expandable Upto 256 GB","Display":" 12.7 cm (5 inch) quarter HD Display","Camera":" 8MP Rear Camera | 5MP Front Camera","Processor":" 2500 mAh Li-Ion Battery","Star Rating":4.2,"Total Rating":"6,051 Ratings & 802 Reviews","Price":9990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/j2rw87k0\/mobile\/f\/b\/y\/vivo-y53-1606-original-imaeufzqg5mqqeyv.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y53-matte-black-16-gb\/p\/itmeuydacv5q9kpz?pid=MOBEUFZG2NQJTFBY&lid=LSTMOBEUFZG2NQJTFBYZNLEZL&marketplace=FLIPKART&store=tyy%2F4io&srno=b_9_208&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=042ed048-bc24-4b07-aff9-b5a4785aec5b.MOBEUFZG2NQJTFBY.SEARCH&ppt=None&ppn=None&ssid=4dj8hiy7gg0000001666103116338"},{"Title":"vivo Y16 (Drizzling Gold, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 1 TB","Display":" 16.54 cm (6.51 inch) HD+ Display","Camera":" 13MP + 2MP | 5MP Front Camera","Processor":" 5000 mAh Lithium Battery","Star Rating":4.3,"Total Rating":"32 Ratings & 1 Reviews","Price":9974,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/xif0q\/mobile\/r\/d\/p\/-original-imaggcerdxgpxyh3.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y16-drizzling-gold-32-gb\/p\/itm72f3a9786718b?pid=MOBGHV2FEHZ4ZZRR&lid=LSTMOBGHV2FEHZ4ZZRRESCE4C&marketplace=FLIPKART&store=tyy%2F4io&srno=b_2_37&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=dac1b38a-a28b-445c-a24b-6e92ccdb0325.MOBGHV2FEHZ4ZZRR.SEARCH&ppt=None&ppn=None&ssid=azvj47amcw0000001666103042909"},{"Title":"vivo y15s (MYSTIC BLUE, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM","Display":" 16.54 cm (6.51 inch) Display","Camera":" 13MP Rear Camera","Processor":" 5000 mAh Battery","Star Rating":4.3,"Total Rating":"2,824 Ratings & 209 Reviews","Price":9800,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/xif0q\/mobile\/p\/d\/m\/y15s-v2125-vivo-original-imagh3xf6fwzydvf.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y15s-mystic-blue-32-gb\/p\/itmab0a94ae14bf0?pid=MOBGH3XFX5VFKHZC&lid=LSTMOBGH3XFX5VFKHZCYSGI4N&marketplace=FLIPKART&store=tyy%2F4io&srno=b_2_46&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=dac1b38a-a28b-445c-a24b-6e92ccdb0325.MOBGH3XFX5VFKHZC.SEARCH&ppt=None&ppn=None&ssid=azvj47amcw0000001666103042909"},{"Title":"vivo Y15c (Mystic Blue, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 1 TB","Display":" 16.54 cm (6.51 inch) HD+ Display","Camera":" 13MP + 2MP | 8MP Front Camera","Processor":" 5000 mAh Lithium Battery","Star Rating":4.1,"Total Rating":"776 Ratings & 55 Reviews","Price":9699,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l3bx5e80\/mobile\/3\/a\/4\/-original-imagegz3g8zkyhyq.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y15c-mystic-blue-32-gb\/p\/itma66de6d33d999?pid=MOBGE2ZHJEFGHVJD&lid=LSTMOBGE2ZHJEFGHVJDXQXCFW&marketplace=FLIPKART&store=tyy%2F4io&srno=b_4_93&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=599ae7de-c330-4915-a060-88fe6edb7592.MOBGE2ZHJEFGHVJD.SEARCH&ppt=None&ppn=None&ssid=2o7gninns00000001666103063185"},{"Title":"vivo Y15s (Wave Green, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 1 TB","Display":" 16.54 cm (6.51 inch) HD+ Display","Camera":" 13MP + 2MP | 8MP Front Camera","Processor":" 5000 mAh Lithium Battery Battery","Star Rating":4.3,"Total Rating":"2,824 Ratings & 209 Reviews","Price":9499,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kzvlua80\/mobile\/8\/h\/3\/-original-imagbrtkhbgqwygp.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y15s-wave-green-32-gb\/p\/itm3a7aa95e1360b?pid=MOBGBNPZCFZWMYV6&lid=LSTMOBGBNPZCFZWMYV60DLU7G&marketplace=FLIPKART&store=tyy%2F4io&srno=b_5_98&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=baba9eea-3912-49a7-a707-dc0499d0a9b9.MOBGBNPZCFZWMYV6.SEARCH&ppt=None&ppn=None&ssid=ji1tw5a0ww0000001666103074022"},{"Title":"vivo Y15s (Mystic Blue, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 1 TB","Display":" 16.54 cm (6.51 inch) HD+ Display","Camera":" 13MP + 2MP | 8MP Front Camera","Processor":" 5000 mAh Lithium Battery Battery","Star Rating":4.3,"Total Rating":"2,824 Ratings & 209 Reviews","Price":9499,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kzvlua80\/mobile\/l\/2\/p\/-original-imagbrtkcpkgkku4.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y15s-mystic-blue-32-gb\/p\/itm3a7aa95e1360b?pid=MOBGBNPZASQCAKYG&lid=LSTMOBGBNPZASQCAKYGQNSUS3&marketplace=FLIPKART&store=tyy%2F4io&srno=b_5_97&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=baba9eea-3912-49a7-a707-dc0499d0a9b9.MOBGBNPZASQCAKYG.SEARCH&ppt=None&ppn=None&ssid=ji1tw5a0ww0000001666103074022"},{"Title":"vivo Y3s (Mint Green, 32 GB)","Ram or Rom":"2 GB RAM | 32 GB ROM | Expandable Upto 1 TB","Display":" 16.54 cm (6.51 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 5000 mAh Li-ion Battery","Star Rating":4.3,"Total Rating":"289 Ratings & 32 Reviews","Price":9490,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kura1e80\/mobile\/r\/g\/a\/y3s-pd2074f-bf-cf-ex-v2044-vivo-original-imag7t9mqqng2avb.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y3s-mint-green-32-gb\/p\/itm860a1ae826495?pid=MOBG7QHGEGZKFHZK&lid=LSTMOBG7QHGEGZKFHZKPXEVBN&marketplace=FLIPKART&store=tyy%2F4io&srno=b_8_178&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=31ece0b3-4227-473f-8b8d-ff82f6932048.MOBG7QHGEGZKFHZK.SEARCH&ppt=None&ppn=None&ssid=3g9xr7h8q80000001666103106056"},{"Title":"vivo Y91i (Ocean Blue, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 256 GB","Display":" 15.8 cm (6.22 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 4030 mAh Lithium-ion Battery","Star Rating":4.3,"Total Rating":"9,715 Ratings & 645 Reviews","Price":9490,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/k9stjm80\/mobile\/8\/q\/9\/vivo-y91i-vivo-1820-pd1818hf-ex-original-imafrgnrngnjwfka.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y91i-ocean-blue-32-gb\/p\/itme66fe8a09dbef?pid=MOBFQEDGGDYRB8Q9&lid=LSTMOBFQEDGGDYRB8Q9SDKX1D&marketplace=FLIPKART&store=tyy%2F4io&srno=b_8_184&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=31ece0b3-4227-473f-8b8d-ff82f6932048.MOBFQEDGGDYRB8Q9.SEARCH&ppt=None&ppn=None&ssid=3g9xr7h8q80000001666103106056"},{"Title":"vivo Y1s (Aurora Blue, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 256 GB","Display":" 15.8 cm (6.22 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 4030 mAh Battery","Star Rating":4.3,"Total Rating":"1,730 Ratings & 112 Reviews","Price":9490,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kpwybgw0\/mobile\/y\/f\/3\/y1s-vivo-1929-vivo-original-imag4fdmfgschvf6.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y1s-aurora-blue-32-gb\/p\/itm44f0aa884b6d7?pid=MOBG3W3XC3YXBNGG&lid=LSTMOBG3W3XC3YXBNGGZW6HRI&marketplace=FLIPKART&store=tyy%2F4io&srno=b_5_107&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=baba9eea-3912-49a7-a707-dc0499d0a9b9.MOBG3W3XC3YXBNGG.SEARCH&ppt=None&ppn=None&ssid=ji1tw5a0ww0000001666103074022"},{"Title":"vivo Y91i (Ocean Blue, 32 GB)","Ram or Rom":"2 GB RAM | 32 GB ROM | Expandable Upto 256 GB","Display":" 15.8 cm (6.22 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 4030 mAh Li-ion Battery","Star Rating":4.3,"Total Rating":"42,772 Ratings & 2,930 Reviews","Price":9490,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/k2jbyq80pkrrdj\/mobile-refurbished\/5\/q\/e\/y91i-32-u-1820-vivo-2-original-imafegpdvpncyxew.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y91i-ocean-blue-32-gb\/p\/itmff6vsadyrbauf?pid=MOBFEFCPGZZWYNRY&lid=LSTMOBFEFCPGZZWYNRYCZBCMP&marketplace=FLIPKART&store=tyy%2F4io&srno=b_8_191&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=31ece0b3-4227-473f-8b8d-ff82f6932048.MOBFEFCPGZZWYNRY.SEARCH&ppt=None&ppn=None&ssid=3g9xr7h8q80000001666103106056"},{"Title":"vivo Y1s (Olive Black, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 256 GB","Display":" 15.8 cm (6.22 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 4030 mAh Battery","Star Rating":4.3,"Total Rating":"1,730 Ratings & 112 Reviews","Price":9490,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kpwybgw0\/mobile\/y\/j\/k\/y1s-vivo-1929-vivo-original-imag4fdmkbabgea8.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y1s-olive-black-32-gb\/p\/itm44f0aa884b6d7?pid=MOBG3W3X7TAEXT3J&lid=LSTMOBG3W3X7TAEXT3JS8LLI3&marketplace=FLIPKART&store=tyy%2F4io&srno=b_5_115&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=baba9eea-3912-49a7-a707-dc0499d0a9b9.MOBG3W3X7TAEXT3J.SEARCH&ppt=None&ppn=None&ssid=ji1tw5a0ww0000001666103074022"},{"Title":"vivo Y3s (Pearl white, 32 GB)","Ram or Rom":"2 GB RAM | 32 GB ROM | Expandable Upto 1 TB","Display":" 16.54 cm (6.51 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 5000 mAh Li-ion Battery","Star Rating":4.3,"Total Rating":"289 Ratings & 32 Reviews","Price":9490,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kura1e80\/mobile\/s\/p\/j\/y3s-pd2074f-bf-cf-ex-v2044-vivo-original-imag7t9m8czgtbng.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y3s-pearl-white-32-gb\/p\/itm860a1ae826495?pid=MOBG7QHGH6B7ASVC&lid=LSTMOBG7QHGH6B7ASVC27LQUZ&marketplace=FLIPKART&store=tyy%2F4io&srno=b_8_177&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=31ece0b3-4227-473f-8b8d-ff82f6932048.MOBG7QHGH6B7ASVC.SEARCH&ppt=None&ppn=None&ssid=3g9xr7h8q80000001666103106056"},{"Title":"vivo Y3s (Starry Blue, 32 GB)","Ram or Rom":"2 GB RAM | 32 GB ROM | Expandable Upto 1 TB","Display":" 16.54 cm (6.51 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 5000 mAh Li-ion Battery","Star Rating":4.3,"Total Rating":"289 Ratings & 32 Reviews","Price":9490,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kura1e80\/mobile\/f\/j\/w\/y3s-pd2074f-bf-cf-ex-v2044-vivo-original-imag7t9mjhqxm25w.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y3s-starry-blue-32-gb\/p\/itm860a1ae826495?pid=MOBG7QHGKHGSQH6P&lid=LSTMOBG7QHGKHGSQH6PBS2LOC&marketplace=FLIPKART&store=tyy%2F4io&srno=b_8_173&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=31ece0b3-4227-473f-8b8d-ff82f6932048.MOBG7QHGKHGSQH6P.SEARCH&ppt=None&ppn=None&ssid=3g9xr7h8q80000001666103106056"},{"Title":"vivo Y11 (Agate Red, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM","Display":" 16.13 cm (6.35 inch) HD+ Display","Camera":" 13MP + 2MP | 8MP Front Camera","Processor":" 5000 mAh Battery","Star Rating":4.4,"Total Rating":"20,250 Ratings & 1,347 Reviews","Price":9449,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/k4lmv0w0\/mobile\/h\/q\/g\/vivo-y11-vivo-1906-pd1930cf-ex-original-imafngxhzw3e5gdw.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y11-agate-red-32-gb\/p\/itmb764fb6d6ef60?pid=MOBFN9ZJA8UZPHQG&lid=LSTMOBFN9ZJA8UZPHQGNP303P&marketplace=FLIPKART&store=tyy%2F4io&srno=b_8_179&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=31ece0b3-4227-473f-8b8d-ff82f6932048.MOBFN9ZJA8UZPHQG.SEARCH&ppt=None&ppn=None&ssid=3g9xr7h8q80000001666103106056"},{"Title":"vivo Y11 (Mineral Blue, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM","Display":" 16.13 cm (6.35 inch) HD+ Display","Camera":" 13MP + 2MP | 8MP Front Camera","Processor":" 5000 mAh Battery","Star Rating":4.4,"Total Rating":"20,250 Ratings & 1,347 Reviews","Price":9449,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/k4lmv0w0\/mobile\/b\/c\/k\/vivo-y11-vivo-1906-pd1930cf-ex-original-imafngxhugkxu8wt.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y11-mineral-blue-32-gb\/p\/itmb764fb6d6ef60?pid=MOBFN9ZJYFCGVBCK&lid=LSTMOBFN9ZJYFCGVBCKEOXT32&marketplace=FLIPKART&store=tyy%2F4io&srno=b_5_105&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=baba9eea-3912-49a7-a707-dc0499d0a9b9.MOBFN9ZJYFCGVBCK.SEARCH&ppt=None&ppn=None&ssid=ji1tw5a0ww0000001666103074022"},{"Title":"vivo Y1S (Aurora Blue, 32 GB)","Ram or Rom":"2 GB RAM | 32 GB ROM","Display":" 15.8 cm (6.22 inch) Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 4030 mAh Battery","Star Rating":3.8,"Total Rating":"312 Ratings & 23 Reviews","Price":8999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kpr8k280\/mobile\/2\/b\/n\/y1s-y1s-vivo-original-imag3wsvczeqqk7f.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y1s-aurora-blue-32-gb\/p\/itmf6ee13a2e8afd?pid=MOBG3WSVKZVXYFCB&lid=LSTMOBG3WSVKZVXYFCBYVQAW0&marketplace=FLIPKART&store=tyy%2F4io&srno=b_7_150&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=f62b5a72-f723-44aa-88ac-848961917c77.MOBG3WSVKZVXYFCB.SEARCH&ppt=None&ppn=None&ssid=gf7roxrdf40000001666103095475"},{"Title":"vivo Y1S (Olive Black, 32 GB)","Ram or Rom":"2 GB RAM | 32 GB ROM","Display":" 15.8 cm (6.22 inch) Display","Camera":" 13MP Rear Camera","Processor":" 4030 mAh Battery","Star Rating":3.8,"Total Rating":"312 Ratings & 23 Reviews","Price":8590,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kppt47k0\/mobile\/g\/9\/m\/y1s-vivo2015-vivo-original-imag3vquzuv2skxu.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y1s-olive-black-32-gb\/p\/itmf6ee13a2e8afd?pid=MOBG3VQUZWBMXZXU&lid=LSTMOBG3VQUZWBMXZXURJIVUD&marketplace=FLIPKART&store=tyy%2F4io&srno=b_9_210&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=042ed048-bc24-4b07-aff9-b5a4785aec5b.MOBG3VQUZWBMXZXU.SEARCH&ppt=None&ppn=None&ssid=4dj8hiy7gg0000001666103116338"},{"Title":"vivo Y1S (Olive Black, 32 GB)","Ram or Rom":"2 GB RAM | 32 GB ROM","Display":" 15.8 cm (6.22 inch) Display","Camera":" 13MP Rear Camera","Processor":" 4030 mAh Battery","Star Rating":3.8,"Total Rating":"312 Ratings & 23 Reviews","Price":8590,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kppt47k0\/mobile\/g\/9\/m\/y1s-vivo2015-vivo-original-imag3vquzuv2skxu.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y1s-olive-black-32-gb\/p\/itmf6ee13a2e8afd?pid=MOBG3VQUZWBMXZXU&lid=LSTMOBG3VQUZWBMXZXURJIVUD&marketplace=FLIPKART&store=tyy%2F4io&srno=b_9_210&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=042ed048-bc24-4b07-aff9-b5a4785aec5b.MOBG3VQUZWBMXZXU.SEARCH&ppt=None&ppn=None&ssid=4dj8hiy7gg0000001666103116338"},{"Title":"vivo Y01 (Sapphire Blue, 32 GB)","Ram or Rom":"2 GB RAM | 32 GB ROM","Display":" 16.54 cm (6.51 inch) HD+ Display","Camera":" 8MP Rear Camera | 5MP Front Camera","Processor":" 5000 mAh Lithium Battery","Star Rating":4.2,"Total Rating":"621 Ratings & 44 Reviews","Price":7999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l3xcr680\/mobile\/t\/f\/h\/-original-imagexm8xtfbppyf.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y01-sapphire-blue-32-gb\/p\/itm3dde688a51a9e?pid=MOBGE6XRVJNZQDZC&lid=LSTMOBGE6XRVJNZQDZCW6F7PL&marketplace=FLIPKART&store=tyy%2F4io&srno=b_2_40&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=dac1b38a-a28b-445c-a24b-6e92ccdb0325.MOBGE6XRVJNZQDZC.SEARCH&ppt=None&ppn=None&ssid=azvj47amcw0000001666103042909"},{"Title":"vivo Y01 (Elegant Black, 32 GB)","Ram or Rom":"2 GB RAM | 32 GB ROM","Display":" 16.54 cm (6.51 inch) HD+ Display","Camera":" 8MP Rear Camera | 5MP Front Camera","Processor":" 5000 mAh Lithium Battery","Star Rating":4.2,"Total Rating":"621 Ratings & 44 Reviews","Price":7999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l3xcr680\/mobile\/d\/j\/c\/-original-imagexm886dqzxgy.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y01-elegant-black-32-gb\/p\/itm3dde688a51a9e?pid=MOBGE6XRMMUTEJYG&lid=LSTMOBGE6XRMMUTEJYGSPKA5Y&marketplace=FLIPKART&store=tyy%2F4io&srno=b_2_39&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=dac1b38a-a28b-445c-a24b-6e92ccdb0325.MOBGE6XRMMUTEJYG.SEARCH&ppt=None&ppn=None&ssid=azvj47amcw0000001666103042909"},{"Title":"vivo Y91i (Fusion Black, 32 GB)","Ram or Rom":"2 GB RAM | 32 GB ROM | Expandable Upto 256 GB","Display":" 15.8 cm (6.22 inch) HD+ Display","Camera":" 13MP Rear Camera | 5MP Front Camera","Processor":" 4030 mAh Li-ion Battery","Star Rating":4.3,"Total Rating":"42,772 Ratings & 2,930 Reviews","Price":7999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/k2jbyq80pkrrdj\/mobile-refurbished\/x\/t\/h\/y91i-16-a-1820-vivo-2-original-imafegpdzevxhhn2.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-y91i-fusion-black-32-gb\/p\/itmff6vsadyrbauf?pid=MOBFEFCPX6AJ7C6K&lid=LSTMOBFEFCPX6AJ7C6KGKPZED&marketplace=FLIPKART&store=tyy%2F4io&srno=b_5_106&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=baba9eea-3912-49a7-a707-dc0499d0a9b9.MOBFEFCPX6AJ7C6K.SEARCH&ppt=None&ppn=None&ssid=ji1tw5a0ww0000001666103074022"}]';
+                var mydata = JSON.parse(data);
+                var div = document.getElementById('customers');
+                for(var i = 0;i < mydata.length; i++){
+                    div.innerHTML = div.innerHTML + "<tr><td>"+ mydata[i].Title +"</td>"+
+                                                        "<td>"+ mydata[i]['Ram or Rom'] +"</td>"+
+                                                        "<td>"+ mydata[i].Display +"</td>"+
+                                                        "<td>"+ mydata[i].Camera +"</td>"+
+                                                        "<td>"+ mydata[i].Processor +"</td>"+
+                                                        "<td>"+ mydata[i]['Star Rating']+"</td>"+
+                                                        "<td>"+ mydata[i]['Total Rating']+"</td>"+
+                                                        "<td>"+ mydata[i].Price +"</td>"+
+                                                        "<td><a href="+mydata[i]['Img Url']+">"+ 'Image_Url'+"</a></td>"+
+                                                        "<td>"+ mydata[i]['Launch Status'] +"</td>"+
+                                                        "<td><a href="+mydata[i].Buy+" target='__blank'>"+ 'Buy_Url'+"</a></td>"+
+                                                    "</tr>";
+                }
+            }
+        </script>
+</body>
+</html>

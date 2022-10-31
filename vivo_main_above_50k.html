@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="all_main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <title>flipkart data</title>
+
+</head>
+
+<body onload="load()">
+    <div class="container">
+        <div class="left-table">
+            <ul>
+                <a href="./index.html">
+                    <li class='sidelist' >HOME PAGE</li>
+                </a>
+                <a href="./apple_main.html">
+                    <li class='sidelist' >Apple</li>
+                </a>
+                <a href="./honor_main.html">
+                    <li class='sidelist' >Honor</li>
+                </a>
+                <a href="./infinix_main.html">
+                    <li class='sidelist'>Infinix</li>
+                </a>
+                <a href="./mi_main.html">
+                    <li class='sidelist' >Mi</li>
+                </a>
+                <a href="./oppo_main.html">
+                    <li class='sidelist' >Oppo</li>
+                </a>
+                <a href="./poco_main.html">
+                    <li class='sidelist' >Poco</li>
+                </a>
+                <a href="./realme_main.html">
+                    <li class='sidelist' >Realme</li>
+                </a>
+                <a href="./samsung_main.html">
+                    <li class='sidelist ' >Samsung</li>
+                </a>
+                <a href="./vivo_main.html">
+                    <li class='sidelist active1' >Vivo</li>
+                </a>
+            </ul>
+        </div>
+        <div class="right-table">
+            <div class="right-table-chart">
+                <div class="chartt">
+                <canvas id="priceChart" ></canvas>
+                <canvas id="launchStatusChart" ></canvas>
+                <canvas id="ratingChart" ></canvas>
+                </div>
+            </div>
+            <div class="right-table-table">
+                <table id="customers">
+                    <thead>
+                    <tr>
+                                        <th>TITLE</th>
+										<th>RAM OR ROM</th>
+										<th>DISPLAY</th>
+										<th>CAMERA</th>
+										<th>PROCESSOR</th>
+										<th>STAR RATING</th>
+										<th>TOTAL RATINGS</th>
+										<th>PRICE</th>
+										<th>IMG LINKS</th>
+										<th>LAUNCH STATUS</th>
+										<th>BUY</th>
+                    </tr>
+                </thead>
+                </table>
+            </div>
+            <div class="right-table-download">
+                <a href="./vivo_main.html"><button>Below Rs.10000</button></a>
+                <a href="./vivo_main_10k-25k.html"><button>Rs.10000-Rs.25000</button></a>
+                <a href="./vivo_main_26k-50k.html"><button>Rs.26000-Rs.50000</button></a>
+                <a href="./vivo_main_above_50k.html"><button>Above Rs.50000</button></a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script>
+        price ='[{"one": 23,"two": 183,"three": 45,"four": 15}]'
+        
+        var pricedata = JSON.parse(price);
+        for(var i = 0;i < pricedata.length; i++){
+            var xValues = ["<10k","10k-25k","26k-50k",">50k"]
+            var yValues = [pricedata[i].one,pricedata[i].two,pricedata[i].three,pricedata[i].four];
+            var barColors = ["#FF0000", "#FF4500", "#FF6347", "#FF7F50"];
+        
+            new Chart("priceChart", {
+                type: "bar",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Price"
+                }
+            }
+            });
+        }
+        
+        launch_status='[{"Coming_Soon": 19,"Available": 187}]'
+        var launchdata = JSON.parse(launch_status);
+        for(var i = 0;i < launchdata.length; i++){
+            var xValues = ["Coming_Soon","Available"]
+            var yValues = [launchdata[i].Coming_Soon,launchdata[i].Available];
+            var barColors = ["#FF0000", "#FF4500"];
+        
+            new Chart("launchStatusChart", {
+                type: "pie",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Launch status"
+                }
+            }
+            });
+        }
+        rating='[{"one": 1,"two": 202,"three": 3,"four": 0}]'
+        var ratingdata = JSON.parse(rating);
+        for(var i = 0;i < ratingdata.length; i++){
+            var xValues = [">=4.6","4.1 to 4.5","3.6 to 4.0","<=3.5"]
+            var yValues = [ratingdata[i].one,ratingdata[i].two,ratingdata[i].three,ratingdata[i].four];
+            var barColors = ["#FF0000", "#FF4500", "#FF6347", "#FF7F50"];
+        
+            new Chart("ratingChart", {
+                type: "line",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Rating"
+                }
+            }
+            });
+        }
+        </script>
+        <script type="text/javascript">
+        
+            function load() {
+data='[{"Title":"vivo X80 Pro (Cosmic Black, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 17.22 cm (6.78 inch) Quad HD Display","Camera":" 50MP + 48MP + 12MP + 8MP | 32MP Front Camera","Processor":" 4700 mAh Lithium Battery","Star Rating":4.4,"Total Rating":"593 Ratings & 138 Reviews","Price":79999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l3929ow0\/mobile\/v\/n\/s\/-original-imageewzeguggzvc.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-x80-pro-cosmic-black-256-gb\/p\/itm91e0e7dd2d74d?pid=MOBGE89YSMWJV5PZ&lid=LSTMOBGE89YSMWJV5PZWPKCA5&marketplace=FLIPKART&store=tyy%2F4io&srno=b_4_77&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=599ae7de-c330-4915-a060-88fe6edb7592.MOBGE89YSMWJV5PZ.SEARCH&ppt=None&ppn=None&ssid=2o7gninns00000001666103063185"},{"Title":"vivo X70 Pro+ (Enigma Black, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 17.22 cm (6.78 inch) WQHD Display","Camera":" 50MP + 48MP + 12MP + 8MP | 32MP Front Camera","Processor":" 4500 mAh Battery","Star Rating":4.5,"Total Rating":"518 Ratings & 110 Reviews","Price":79990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/ku4ezrk0\/mobile\/p\/c\/q\/x70-pro-v2114-vivo-original-imag7bq5m6bbefup.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-x70-pro-enigma-black-256-gb\/p\/itm838af278332f6?pid=MOBG6XXU6WJPKWSY&lid=LSTMOBG6XXU6WJPKWSYHR6CVJ&marketplace=FLIPKART&store=tyy%2F4io&srno=b_9_209&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=042ed048-bc24-4b07-aff9-b5a4785aec5b.MOBG6XXU6WJPKWSY.SEARCH&ppt=None&ppn=None&ssid=4dj8hiy7gg0000001666103116338"},{"Title":"vivo X70 Pro+ (Enigma Black, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 17.22 cm (6.78 inch) WQHD Display","Camera":" 50MP + 48MP + 12MP + 8MP | 32MP Front Camera","Processor":" 4500 mAh Battery","Star Rating":4.5,"Total Rating":"518 Ratings & 110 Reviews","Price":79990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/ku4ezrk0\/mobile\/p\/c\/q\/x70-pro-v2114-vivo-original-imag7bq5m6bbefup.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-x70-pro-enigma-black-256-gb\/p\/itm838af278332f6?pid=MOBG6XXU6WJPKWSY&lid=LSTMOBG6XXU6WJPKWSYHR6CVJ&marketplace=FLIPKART&store=tyy%2F4io&srno=b_9_209&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=042ed048-bc24-4b07-aff9-b5a4785aec5b.MOBG6XXU6WJPKWSY.SEARCH&ppt=None&ppn=None&ssid=4dj8hiy7gg0000001666103116338"},{"Title":"vivo X60 Pro+ (Emperor Blue, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 16.66 cm (6.56 inch) Full HD+ Display","Camera":" 50MP + 48MP + 32MP + 8MP | 32MP Front Camera","Processor":" 4200 mAh Lithium-ion Battery","Star Rating":4.6,"Total Rating":"350 Ratings & 59 Reviews","Price":69990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kmns7m80\/mobile\/r\/a\/f\/x60-pro-v2047-vivo-original-imagfht6cwsabkhg.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-x60-pro-emperor-blue-256-gb\/p\/itmc56b23791cfd5?pid=MOBGF89FS5K98WPH&lid=LSTMOBGF89FS5K98WPHNQTX2S&marketplace=FLIPKART&store=tyy%2F4io&srno=b_8_192&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=31ece0b3-4227-473f-8b8d-ff82f6932048.MOBGF89FS5K98WPH.SEARCH&ppt=None&ppn=None&ssid=3g9xr7h8q80000001666103106056"},{"Title":"vivo X80 (Cosmic Black, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 17.22 cm (6.78 inch) Full HD+ Display","Camera":" 50MP + 12MP + 12MP | 32MP Front Camera","Processor":" 4500 mAh Lithium Battery","Star Rating":4.5,"Total Rating":"305 Ratings & 56 Reviews","Price":59999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l3929ow0\/mobile\/f\/y\/u\/-original-imageewy9zk35gk7.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-x80-cosmic-black-256-gb\/p\/itmf927cc7cbbc19?pid=MOBGE87XHCAB8FFU&lid=LSTMOBGE87XHCAB8FFULNXH8H&marketplace=FLIPKART&store=tyy%2F4io&srno=b_4_84&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=599ae7de-c330-4915-a060-88fe6edb7592.MOBGE87XHCAB8FFU.SEARCH&ppt=None&ppn=None&ssid=2o7gninns00000001666103063185"},{"Title":"vivo X80 (Urban Blue, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 17.22 cm (6.78 inch) Full HD+ Display","Camera":" 50MP + 12MP + 12MP | 32MP Front Camera","Processor":" 4500 mAh Lithium Battery","Star Rating":4.5,"Total Rating":"305 Ratings & 56 Reviews","Price":59999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l3929ow0\/mobile\/k\/g\/q\/-original-imageewzvy6d9cgb.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-x80-urban-blue-256-gb\/p\/itmf927cc7cbbc19?pid=MOBGE87XAJKZFDZY&lid=LSTMOBGE87XAJKZFDZYUPULGU&marketplace=FLIPKART&store=tyy%2F4io&srno=b_5_108&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=baba9eea-3912-49a7-a707-dc0499d0a9b9.MOBGE87XAJKZFDZY.SEARCH&ppt=None&ppn=None&ssid=ji1tw5a0ww0000001666103074022"},{"Title":"vivo X80 (Cosmic Black, 128 GB)","Ram or Rom":"8 GB RAM | 128 GB ROM","Display":" 17.22 cm (6.78 inch) Full HD+ Display","Camera":" 50MP + 12MP + 12MP | 32MP Front Camera","Processor":" 4500 mAh Lithium Battery","Star Rating":4.5,"Total Rating":"519 Ratings & 115 Reviews","Price":54999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l3929ow0\/mobile\/f\/y\/u\/-original-imageewy9zk35gk7.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-x80-cosmic-black-128-gb\/p\/itmf927cc7cbbc19?pid=MOBGE87X7YAQGSZN&lid=LSTMOBGE87X7YAQGSZNOWXX7M&marketplace=FLIPKART&store=tyy%2F4io&srno=b_4_83&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=599ae7de-c330-4915-a060-88fe6edb7592.MOBGE87X7YAQGSZN.SEARCH&ppt=None&ppn=None&ssid=2o7gninns00000001666103063185"},{"Title":"vivo X80 (Urban Blue, 128 GB)","Ram or Rom":"8 GB RAM | 128 GB ROM","Display":" 17.22 cm (6.78 inch) Full HD+ Display","Camera":" 50MP + 12MP + 12MP | 32MP Front Camera","Processor":" 4500 mAh Lithium Battery","Star Rating":4.5,"Total Rating":"519 Ratings & 115 Reviews","Price":54999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l3929ow0\/mobile\/k\/g\/q\/-original-imageewzvy6d9cgb.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-x80-urban-blue-128-gb\/p\/itmf927cc7cbbc19?pid=MOBGE87XUGZZCWU3&lid=LSTMOBGE87XUGZZCWU31QLAID&marketplace=FLIPKART&store=tyy%2F4io&srno=b_4_85&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=599ae7de-c330-4915-a060-88fe6edb7592.MOBGE87XUGZZCWU3.SEARCH&ppt=None&ppn=None&ssid=2o7gninns00000001666103063185"},{"Title":"vivo X70 Pro (Aurora Dawn, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 16.66 cm (6.56 inch) Full HD+ Display","Camera":" 50MP + 12MP + 12MP + 8MP | 32MP Front Camera","Processor":" 4450 mAh Battery","Star Rating":4.4,"Total Rating":"956 Ratings & 142 Reviews","Price":52990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/ku4ezrk0\/mobile\/u\/z\/i\/x70-pro-v2105-vivo-original-imag7bq4eumqhgka.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-x70-pro-aurora-dawn-256-gb\/p\/itmda08d804c661a?pid=MOBG6XXUG4EWFEKT&lid=LSTMOBG6XXUG4EWFEKTV2APVF&marketplace=FLIPKART&store=tyy%2F4io&srno=b_7_165&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=f62b5a72-f723-44aa-88ac-848961917c77.MOBG6XXUG4EWFEKT.SEARCH&ppt=None&ppn=None&ssid=gf7roxrdf40000001666103095475"},{"Title":"vivo X70 Pro (Cosmic Black, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 16.66 cm (6.56 inch) Full HD+ Display","Camera":" 50MP + 12MP + 12MP + 8MP | 32MP Front Camera","Processor":" 4450 mAh Battery","Star Rating":4.4,"Total Rating":"956 Ratings & 142 Reviews","Price":52990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/ku4ezrk0\/mobile\/q\/m\/9\/x70-pro-v2105-vivo-original-imag7bqfd3vhta7j.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-x70-pro-cosmic-black-256-gb\/p\/itmda08d804c661a?pid=MOBG6XXUS8XRYGB9&lid=LSTMOBG6XXUS8XRYGB9346WLR&marketplace=FLIPKART&store=tyy%2F4io&srno=b_8_169&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=31ece0b3-4227-473f-8b8d-ff82f6932048.MOBG6XXUS8XRYGB9.SEARCH&ppt=None&ppn=None&ssid=3g9xr7h8q80000001666103106056"},{"Title":"vivo X70 Pro (Aurora Dawn, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 16.66 cm (6.56 inch) Full HD+ Display","Camera":" 50MP + 12MP + 12MP + 8MP | 32MP Front Camera","Processor":" 4450 mAh Battery","Star Rating":4.4,"Total Rating":"956 Ratings & 142 Reviews","Price":52990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/ku4ezrk0\/mobile\/u\/z\/i\/x70-pro-v2105-vivo-original-imag7bq4eumqhgka.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-x70-pro-aurora-dawn-256-gb\/p\/itmda08d804c661a?pid=MOBG6XXUG4EWFEKT&lid=LSTMOBG6XXUG4EWFEKTV2APVF&marketplace=FLIPKART&store=tyy%2F4io&srno=b_5_120&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=baba9eea-3912-49a7-a707-dc0499d0a9b9.MOBG6XXUG4EWFEKT.SEARCH&ppt=None&ppn=None&ssid=ji1tw5a0ww0000001666103074022"},{"Title":"vivo X50 Pro (Alpha Grey, 256 GB)","Ram or Rom":"8 GB RAM | 256 GB ROM","Display":" 16.66 cm (6.56 inch) Full HD+ E3 Super AMOLED Display","Camera":" 48MP + 13MP + 8MP + 8MP | 32MP Front Camera","Processor":" 4315 mAh Lithium-ion Battery","Star Rating":4.5,"Total Rating":"2,242 Ratings & 333 Reviews","Price":50049,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kcm9t3k0\/mobile\/p\/p\/q\/vivo-x50-pro-vivo-2006-original-imaftppahwbc6myx.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-x50-pro-alpha-grey-256-gb\/p\/itmdf8a4496a52e7?pid=MOBFTGKRGHTZZPPQ&lid=LSTMOBFTGKRGHTZZPPQ9W2XYI&marketplace=FLIPKART&store=tyy%2F4io&srno=b_9_198&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=042ed048-bc24-4b07-aff9-b5a4785aec5b.MOBFTGKRGHTZZPPQ.SEARCH&ppt=None&ppn=None&ssid=4dj8hiy7gg0000001666103116338"},{"Title":"vivo X60 Pro (Shimmer Blue, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 16.66 cm (6.56 inch) Full HD+ Display","Camera":" 48MP + 13MP + 13MP | 32MP Front Camera","Processor":" 4200 mAh Lithium-ion Battery","Star Rating":4.4,"Total Rating":"1,336 Ratings & 168 Reviews","Price":50049,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kmns7m80\/mobile\/d\/j\/i\/x60-pro-v2046-vivo-original-imagfht6jmwvuvvp.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-x60-pro-shimmer-blue-256-gb\/p\/itm6b6f0db5aa9f7?pid=MOBGF89FJH5Z73SY&lid=LSTMOBGF89FJH5Z73SYQXWIAH&marketplace=FLIPKART&store=tyy%2F4io&srno=b_4_82&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=599ae7de-c330-4915-a060-88fe6edb7592.MOBGF89FJH5Z73SY.SEARCH&ppt=None&ppn=None&ssid=2o7gninns00000001666103063185"},{"Title":"vivo X50 Pro (Alpha Grey, 256 GB)","Ram or Rom":"8 GB RAM | 256 GB ROM","Display":" 16.66 cm (6.56 inch) Full HD+ E3 Super AMOLED Display","Camera":" 48MP + 13MP + 8MP + 8MP | 32MP Front Camera","Processor":" 4315 mAh Lithium-ion Battery","Star Rating":4.5,"Total Rating":"2,242 Ratings & 333 Reviews","Price":50049,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kcm9t3k0\/mobile\/p\/p\/q\/vivo-x50-pro-vivo-2006-original-imaftppahwbc6myx.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-x50-pro-alpha-grey-256-gb\/p\/itmdf8a4496a52e7?pid=MOBFTGKRGHTZZPPQ&lid=LSTMOBFTGKRGHTZZPPQ9W2XYI&marketplace=FLIPKART&store=tyy%2F4io&srno=b_9_198&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=042ed048-bc24-4b07-aff9-b5a4785aec5b.MOBFTGKRGHTZZPPQ.SEARCH&ppt=None&ppn=None&ssid=4dj8hiy7gg0000001666103116338"},{"Title":"vivo X60 Pro (Midnight Black, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 16.66 cm (6.56 inch) Full HD+ Display","Camera":" 48MP + 13MP + 13MP | 32MP Front Camera","Processor":" 4200 mAh Lithium-ion Battery","Star Rating":4.4,"Total Rating":"1,336 Ratings & 168 Reviews","Price":50049,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kmns7m80\/mobile\/o\/k\/e\/x60-pro-v2046-vivo-original-imagfht6vyrbnfuk.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/vivo-x60-pro-midnight-black-256-gb\/p\/itm6b6f0db5aa9f7?pid=MOBGF89FHMK4Z6NZ&lid=LSTMOBGF89FHMK4Z6NZXK90LI&marketplace=FLIPKART&store=tyy%2F4io&srno=b_5_119&otracker=nmenu_sub_Electronics_0_Vivo&fm=organic&iid=baba9eea-3912-49a7-a707-dc0499d0a9b9.MOBGF89FHMK4Z6NZ.SEARCH&ppt=None&ppn=None&ssid=ji1tw5a0ww0000001666103074022"}]';
+                var mydata = JSON.parse(data);
+                var div = document.getElementById('customers');
+                for(var i = 0;i < mydata.length; i++){
+                    div.innerHTML = div.innerHTML + "<tr><td>"+ mydata[i].Title +"</td>"+
+                                                        "<td>"+ mydata[i]['Ram or Rom'] +"</td>"+
+                                                        "<td>"+ mydata[i].Display +"</td>"+
+                                                        "<td>"+ mydata[i].Camera +"</td>"+
+                                                        "<td>"+ mydata[i].Processor +"</td>"+
+                                                        "<td>"+ mydata[i]['Star Rating']+"</td>"+
+                                                        "<td>"+ mydata[i]['Total Rating']+"</td>"+
+                                                        "<td>"+ mydata[i].Price +"</td>"+
+                                                        "<td><a href="+mydata[i]['Img Url']+">"+ 'Image_Url'+"</a></td>"+
+                                                        "<td>"+ mydata[i]['Launch Status'] +"</td>"+
+                                                        "<td><a href="+mydata[i].Buy+" target='__blank'>"+ 'Buy_Url'+"</a></td>"+
+                                                    "</tr>";
+                }
+            }
+        </script>
+</body>
+</html>

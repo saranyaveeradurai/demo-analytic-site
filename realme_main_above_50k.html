@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="all_main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <title>flipkart data</title>
+
+</head>
+
+<body onload="load()">
+    <div class="container">
+        <div class="left-table">
+            <ul>
+                <a href="./index.html">
+                    <li class='sidelist' >HOME PAGE</li>
+                </a>
+                <a href="./apple_main.html">
+                    <li class='sidelist' >Apple</li>
+                </a>
+                <a href="./honor_main.html">
+                    <li class='sidelist' >Honor</li>
+                </a>
+                <a href="./infinix_main.html">
+                    <li class='sidelist'>Infinix</li>
+                </a>
+                <a href="./mi_main.html">
+                    <li class='sidelist' >Mi</li>
+                </a>
+                <a href="./oppo_main.html">
+                    <li class='sidelist' >Oppo</li>
+                </a>
+                <a href="./poco_main.html">
+                    <li class='sidelist ' >Poco</li>
+                </a>
+                <a href="./realme_main.html">
+                    <li class='sidelist active1' >Realme</li>
+                </a>
+                <a href="./samsung_main.html">
+                    <li class='sidelist' >Samsung</li>
+                </a>
+                <a href="./vivo_main.html">
+                    <li class='sidelist' >Vivo</li>
+                </a>
+            </ul>
+        </div>
+        <div class="right-table">
+            <div class="right-table-chart">
+                <div class="chartt">
+                <canvas id="priceChart" ></canvas>
+                <canvas id="launchStatusChart" ></canvas>
+                <canvas id="ratingChart" ></canvas>
+                </div>
+            </div>
+            <div class="right-table-table">
+                <table id="customers">
+                    <thead>
+                    <tr>
+                                        <th>TITLE</th>
+										<th>RAM OR ROM</th>
+										<th>DISPLAY</th>
+										<th>CAMERA</th>
+										<th>PROCESSOR</th>
+										<th>STAR RATING</th>
+										<th>TOTAL RATINGS</th>
+										<th>PRICE</th>
+										<th>IMG LINKS</th>
+										<th>LAUNCH STATUS</th>
+										<th>BUY</th>
+                    </tr>
+                </thead>
+                </table>
+            </div>
+            <div class="right-table-download">
+                <a href="./realme_main.html"><button>Below Rs.10000</button></a>
+                <a href="./realme_main_10k-25k.html"><button>Rs.10000-Rs.25000</button></a>
+                <a href="./realme_main_26k-50k.html"><button>Rs.26000-Rs.50000</button></a>
+                <a href="./realme_main_above_50k.html"><button>Above Rs.50000</button></a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script>
+        price ='[{"one": 61,"two": 217,"three": 66,"four": 3}]'
+        
+        var pricedata = JSON.parse(price);
+        for(var i = 0;i < pricedata.length; i++){
+            var xValues = ["<10k","10k-25k","26k-50k",">50k"]
+            var yValues = [pricedata[i].one,pricedata[i].two,pricedata[i].three,pricedata[i].four];
+            var barColors = ["#FF0000", "#FF4500", "#FF6347", "#FF7F50"];
+        
+            new Chart("priceChart", {
+                type: "bar",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Price"
+                }
+            }
+            });
+        }
+        
+        launch_status='[{"Coming_Soon": 5,"Available": 273}]'
+        var launchdata = JSON.parse(launch_status);
+        for(var i = 0;i < launchdata.length; i++){
+            var xValues = ["Coming_Soon","Available"]
+            var yValues = [launchdata[i].Coming_Soon,launchdata[i].Available];
+            var barColors = ["#FF0000", "#FF4500"];
+        
+            new Chart("launchStatusChart", {
+                type: "pie",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Launch status"
+                }
+            }
+            });
+        }
+        rating='[{"one": 3,"two": 275,"three": 0,"four": 0}]'
+        var ratingdata = JSON.parse(rating);
+        for(var i = 0;i < ratingdata.length; i++){
+            var xValues = [">=4.6","4.1 to 4.5","3.6 to 4.0","<=3.5"]
+            var yValues = [ratingdata[i].one,ratingdata[i].two,ratingdata[i].three,ratingdata[i].four];
+            var barColors = ["#FF0000", "#FF4500", "#FF6347", "#FF7F50"];
+        
+            new Chart("ratingChart", {
+                type: "line",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Rating"
+                }
+            }
+            });
+        }
+        </script>
+        <script type="text/javascript">
+        
+            function load() {
+data='[{"Title":"realme GT 2 Pro (Paper Green, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 17.02 cm (6.7 inch) Quad HD Display","Camera":" 50MP + 50MP + 2MP | 32MP Front Camera","Processor":" 5000 mAh Lithium Ion Battery","Star Rating":4.4,"Total Rating":"539 Ratings & 91 Reviews","Price":57999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l3rmzrk0\/mobile\/5\/o\/q\/-original-imagetmenznfey7h.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/realme-gt-2-pro-paper-green-256-gb\/p\/itm125e5a8c1de92?pid=MOBGCRYZMNGEBHH3&lid=LSTMOBGCRYZMNGEBHH3CNM78R&marketplace=FLIPKART&store=tyy%2F4io&srno=b_12_266&otracker=nmenu_sub_Electronics_0_Realme&fm=organic&iid=b85747f5-b01c-4d09-b55d-72107b6e1559.MOBGCRYZMNGEBHH3.SEARCH&ppt=None&ppn=None&ssid=mhk85mztgg0000001666101575712"},{"Title":"realme GT 2 Pro (Paper White, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 17.02 cm (6.7 inch) Quad HD Display","Camera":" 50MP + 50MP + 2MP | 32MP Front Camera","Processor":" 5000 mAh Lithium Ion Battery","Star Rating":4.4,"Total Rating":"539 Ratings & 91 Reviews","Price":57999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l3rmzrk0\/mobile\/c\/c\/o\/-original-imagetmegwtng3xg.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/realme-gt-2-pro-paper-white-256-gb\/p\/itm125e5a8c1de92?pid=MOBGCRYZQWG5YWBS&lid=LSTMOBGCRYZQWG5YWBSTI7D0S&marketplace=FLIPKART&store=tyy%2F4io&srno=b_12_270&otracker=nmenu_sub_Electronics_0_Realme&fm=organic&iid=b85747f5-b01c-4d09-b55d-72107b6e1559.MOBGCRYZQWG5YWBS.SEARCH&ppt=None&ppn=None&ssid=mhk85mztgg0000001666101575712"},{"Title":"realme GT 2 Pro (Steel Black, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 17.02 cm (6.7 inch) Quad HD Display","Camera":" 50MP + 50MP + 2MP | 32MP Front Camera","Processor":" 5000 mAh Lithium Ion Battery","Star Rating":4.4,"Total Rating":"539 Ratings & 91 Reviews","Price":57999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l3rmzrk0\/mobile\/3\/o\/b\/-original-imagetmeqj2tndqx.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/realme-gt-2-pro-steel-black-256-gb\/p\/itm125e5a8c1de92?pid=MOBGCRYZ8JWVBCJD&lid=LSTMOBGCRYZ8JWVBCJDXWMYZ2&marketplace=FLIPKART&store=tyy%2F4io&srno=b_9_203&otracker=nmenu_sub_Electronics_0_Realme&fm=organic&iid=df79266c-ea6b-4b2c-8f12-7ecaba177a24.MOBGCRYZ8JWVBCJD.SEARCH&ppt=None&ppn=None&ssid=yl6os0sg340000001666101543800"}]';
+                var mydata = JSON.parse(data);
+                var div = document.getElementById('customers');
+                for(var i = 0;i < mydata.length; i++){
+                    div.innerHTML = div.innerHTML + "<tr><td>"+ mydata[i].Title +"</td>"+
+                                                        "<td>"+ mydata[i]['Ram or Rom'] +"</td>"+
+                                                        "<td>"+ mydata[i].Display +"</td>"+
+                                                        "<td>"+ mydata[i].Camera +"</td>"+
+                                                        "<td>"+ mydata[i].Processor +"</td>"+
+                                                        "<td>"+ mydata[i]['Star Rating']+"</td>"+
+                                                        "<td>"+ mydata[i]['Total Rating']+"</td>"+
+                                                        "<td>"+ mydata[i].Price +"</td>"+
+                                                        "<td><a href="+mydata[i]['Img Url']+">"+ 'Image_Url'+"</a></td>"+
+                                                        "<td>"+ mydata[i]['Launch Status'] +"</td>"+
+                                                        "<td><a href="+mydata[i].Buy+" target='__blank'>"+ 'Buy_Url'+"</a></td>"+
+                                                    "</tr>";
+                }
+            }
+        </script>
+</body>
+</html>

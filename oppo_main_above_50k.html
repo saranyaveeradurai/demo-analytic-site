@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="all_main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <title>flipkart data</title>
+
+</head>
+
+<body onload="load()">
+    <div class="container">
+        <div class="left-table">
+            <ul>
+                <a href="./index.html">
+                    <li class='sidelist' >HOME PAGE</li>
+                </a>
+                <a href="./apple_main.html">
+                    <li class='sidelist' >Apple</li>
+                </a>
+                <a href="./honor_main.html">
+                    <li class='sidelist' >Honor</li>
+                </a>
+                <a href="./infinix_main.html">
+                    <li class='sidelist'>Infinix</li>
+                </a>
+                <a href="./mi_main.html">
+                    <li class='sidelist' >Mi</li>
+                </a>
+                <a href="./oppo_main.html">
+                    <li class='sidelist active1' >Oppo</li>
+                </a>
+                <a href="./poco_main.html">
+                    <li class='sidelist' >Poco</li>
+                </a>
+                <a href="./realme_main.html">
+                    <li class='sidelist' >Realme</li>
+                </a>
+                <a href="./samsung_main.html">
+                    <li class='sidelist' >Samsung</li>
+                </a>
+                <a href="./vivo_main.html">
+                    <li class='sidelist' >Vivo</li>
+                </a>
+            </ul>
+        </div>
+        <div class="right-table">
+            <div class="right-table-chart">
+                <div class="chartt">
+                <canvas id="priceChart" ></canvas>
+                <canvas id="launchStatusChart" ></canvas>
+                <canvas id="ratingChart" ></canvas>
+                </div>
+            </div>
+            <div class="right-table-table">
+                <table id="customers">
+                    <thead>
+                    <tr>
+                                        <th>TITLE</th>
+										<th>RAM OR ROM</th>
+										<th>DISPLAY</th>
+										<th>CAMERA</th>
+										<th>PROCESSOR</th>
+										<th>STAR RATING</th>
+										<th>TOTAL RATINGS</th>
+										<th>PRICE</th>
+										<th>IMG LINKS</th>
+										<th>LAUNCH STATUS</th>
+										<th>BUY</th>
+                    </tr>
+                </thead>
+                </table>
+            </div>
+            <div class="right-table-download">
+                <a href="./oppo_main.html"><button>Below Rs.10000</button></a>
+                <a href="./oppo_main_10k-25k.html"><button>Rs.10000-Rs.25000</button></a>
+                <a href="./oppo_main_26k-50k.html"><button>Rs.26000-Rs.50000</button></a>
+                <a href="./oppo_main_above_50k.html"><button>Above Rs.50000</button></a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script>
+        price ='[{"one": 32,"two": 258,"three": 41,"four": 4}]'
+        
+        var pricedata = JSON.parse(price);
+        for(var i = 0;i < pricedata.length; i++){
+            var xValues = ["<10k","10k-25k","26k-50k",">50k"]
+            var yValues = [pricedata[i].one,pricedata[i].two,pricedata[i].three,pricedata[i].four];
+            var barColors = ["#FF0000", "#FF4500", "#FF6347", "#FF7F50"];
+        
+            new Chart("priceChart", {
+                type: "bar",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Price"
+                }
+            }
+            });
+        }
+        
+        launch_status='[{"Coming_Soon": 82,"Available": 208}]'
+        var launchdata = JSON.parse(launch_status);
+        for(var i = 0;i < launchdata.length; i++){
+            var xValues = ["Coming_Soon","Available"]
+            var yValues = [launchdata[i].Coming_Soon,launchdata[i].Available];
+            var barColors = ["#FF0000", "#FF4500"];
+        
+            new Chart("launchStatusChart", {
+                type: "pie",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Launch status"
+                }
+            }
+            });
+        }
+        rating='[{"one": 6,"two": 275,"three": 7,"four": 2}]'
+        var ratingdata = JSON.parse(rating);
+        for(var i = 0;i < ratingdata.length; i++){
+            var xValues = [">=4.6","4.1 to 4.5","3.6 to 4.0","<=3.5"]
+            var yValues = [ratingdata[i].one,ratingdata[i].two,ratingdata[i].three,ratingdata[i].four];
+            var barColors = ["#FF0000", "#FF4500", "#FF6347", "#FF7F50"];
+        
+            new Chart("ratingChart", {
+                type: "line",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Rating"
+                }
+            }
+            });
+        }
+        </script>
+        <script type="text/javascript">
+        
+            function load() {
+data='[{"Title":"OPPO Find X (Glacier Blue, 256 GB)","Ram or Rom":"8 GB RAM | 256 GB ROM","Display":" 16.26 cm (6.4 inch) Full HD Display","Camera":" 16MP + 20MP | 25MP Front Camera","Processor":" 3730 mAh Li-polymer Battery","Star Rating":4.6,"Total Rating":"449 Ratings & 81 Reviews","Price":60990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/jjylw280\/mobile\/v\/y\/2\/oppo-find-x-cph1871-original-imaf7fb93mkshx5g.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/oppo-find-x-glacier-blue-256-gb\/p\/itmf7yjbm75hdpm4?pid=MOBF7YJBFDFBUVY2&lid=LSTMOBF7YJBFDFBUVY2P1FSEH&marketplace=FLIPKART&store=tyy%2F4io&srno=b_10_226&otracker=CLP_filters&fm=organic&iid=bbebec62-ef2f-426f-8bba-a078f3c24938.MOBF7YJBFDFBUVY2.SEARCH&ppt=None&ppn=None&ssid=0kumkrkwj40000001666100649260"},{"Title":"OPPO Find X (Bordeaux Red, 256 GB)","Ram or Rom":"8 GB RAM | 256 GB ROM","Display":" 16.26 cm (6.4 inch) Full HD Display","Camera":" 16MP + 20MP | 25MP Front Camera","Processor":" 3730 mAh Li-polymer Battery","Star Rating":4.6,"Total Rating":"449 Ratings & 81 Reviews","Price":60990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/jjg15zk0\/mobile\/s\/p\/d\/oppo-find-x-cph1871-original-imaf7ywhqmckb6w9.jpeg?q=70","Launch Status":"Coming Soon","Buy":"https:\/\/www.flipkart.com\/oppo-find-x-bordeaux-red-256-gb\/p\/itmf7yjbm75hdpm4?pid=MOBF7YJBYWVJKSPD&lid=LSTMOBF7YJBYWVJKSPDMEGGAZ&marketplace=FLIPKART&store=tyy%2F4io&srno=b_7_145&otracker=CLP_filters&fm=organic&iid=e87ef7ef-626c-4abd-995e-fe7dc829098e.MOBF7YJBYWVJKSPD.SEARCH&ppt=None&ppn=None&ssid=v08hugyqpc0000001666100606754"},{"Title":"OPPO Reno 10x Zoom (Ocean Green, 256 GB)","Ram or Rom":"8 GB RAM | 256 GB ROM | Expandable Upto 256 GB","Display":" 16.76 cm (6.6 inch) Display","Camera":" 48MP + 13MP + 8MP | 16MP Front Camera","Processor":" 4065 mAh Battery","Star Rating":4.4,"Total Rating":"1,118 Ratings & 208 Reviews","Price":55990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/k2jbyq80pkrrdj\/mobile-refurbished\/g\/q\/d\/reno-10x-zoom-128-a-cph1919-oppo-6-original-imafgwaxvur3hvkz.jpeg?q=70","Launch Status":"Coming Soon","Buy":"https:\/\/www.flipkart.com\/oppo-reno-10x-zoom-ocean-green-256-gb\/p\/itmfgw7vk4eebbhc?pid=MOBFGPMNEHYGKC4J&lid=LSTMOBFGPMNEHYGKC4JSVAOZM&marketplace=FLIPKART&store=tyy%2F4io&srno=b_12_278&otracker=CLP_filters&fm=organic&iid=4d179abb-5712-422e-945e-272971bd0c89.MOBFGPMNEHYGKC4J.SEARCH&ppt=None&ppn=None&ssid=s8br7eg3j40000001666100686986"},{"Title":"OPPO Reno 10x Zoom (Jet Black, 256 GB)","Ram or Rom":"8 GB RAM | 256 GB ROM | Expandable Upto 256 GB","Display":" 16.76 cm (6.6 inch) Display","Camera":" 48MP + 13MP + 8MP | 16MP Front Camera","Processor":" 4065 mAh Battery","Star Rating":4.4,"Total Rating":"1,118 Ratings & 208 Reviews","Price":55990,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/k2jbyq80pkrrdj\/mobile-refurbished\/3\/q\/a\/reno-10x-zoom-128-b-cph1919-oppo-6-original-imafgwaxgbmhjhzc.jpeg?q=70","Launch Status":"Coming Soon","Buy":"https:\/\/www.flipkart.com\/oppo-reno-10x-zoom-jet-black-256-gb\/p\/itmfgw7vk4eebbhc?pid=MOBFGPMN93AUE2ZA&lid=LSTMOBFGPMN93AUE2ZABJ3W2P&marketplace=FLIPKART&store=tyy%2F4io&srno=b_12_279&otracker=CLP_filters&fm=organic&iid=4d179abb-5712-422e-945e-272971bd0c89.MOBFGPMN93AUE2ZA.SEARCH&ppt=None&ppn=None&ssid=s8br7eg3j40000001666100686986"}]';
+                var mydata = JSON.parse(data);
+                var div = document.getElementById('customers');
+                for(var i = 0;i < mydata.length; i++){
+                    div.innerHTML = div.innerHTML + "<tr><td>"+ mydata[i].Title +"</td>"+
+                                                        "<td>"+ mydata[i]['Ram or Rom'] +"</td>"+
+                                                        "<td>"+ mydata[i].Display +"</td>"+
+                                                        "<td>"+ mydata[i].Camera +"</td>"+
+                                                        "<td>"+ mydata[i].Processor +"</td>"+
+                                                        "<td>"+ mydata[i]['Star Rating']+"</td>"+
+                                                        "<td>"+ mydata[i]['Total Rating']+"</td>"+
+                                                        "<td>"+ mydata[i].Price +"</td>"+
+                                                        "<td><a href="+mydata[i]['Img Url']+">"+ 'Image_Url'+"</a></td>"+
+                                                        "<td>"+ mydata[i]['Launch Status'] +"</td>"+
+                                                        "<td><a href="+mydata[i].Buy+" target='__blank'>"+ 'Buy_Url'+"</a></td>"+
+                                                    "</tr>";
+                }
+            }
+        </script>
+</body>
+</html>

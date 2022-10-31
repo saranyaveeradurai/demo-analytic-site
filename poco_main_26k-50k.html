@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="all_main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <title>flipkart data</title>
+
+</head>
+
+<body onload="load()">
+    <div class="container">
+        <div class="left-table">
+            <ul>
+                <a href="./index.html">
+                    <li class='sidelist' >HOME PAGE</li>
+                </a>
+                <a href="./apple_main.html">
+                    <li class='sidelist' >Apple</li>
+                </a>
+                <a href="./honor_main.html">
+                    <li class='sidelist' >Honor</li>
+                </a>
+                <a href="./infinix_main.html">
+                    <li class='sidelist'>Infinix</li>
+                </a>
+                <a href="./mi_main.html">
+                    <li class='sidelist' >Mi</li>
+                </a>
+                <a href="./oppo_main.html">
+                    <li class='sidelist' >Oppo</li>
+                </a>
+                <a href="./poco_main.html">
+                    <li class='sidelist active1' >Poco</li>
+                </a>
+                <a href="./realme_main.html">
+                    <li class='sidelist' >Realme</li>
+                </a>
+                <a href="./samsung_main.html">
+                    <li class='sidelist' >Samsung</li>
+                </a>
+                <a href="./vivo_main.html">
+                    <li class='sidelist' >Vivo</li>
+                </a>
+            </ul>
+        </div>
+        <div class="right-table">
+            <div class="right-table-chart">
+                <div class="chartt">
+                <canvas id="priceChart" ></canvas>
+                <canvas id="launchStatusChart" ></canvas>
+                <canvas id="ratingChart" ></canvas>
+                </div>
+            </div>
+            <div class="right-table-table">
+                <table id="customers">
+                    <thead>
+                    <tr>
+                                        <th>TITLE</th>
+										<th>RAM OR ROM</th>
+										<th>DISPLAY</th>
+										<th>CAMERA</th>
+										<th>PROCESSOR</th>
+										<th>STAR RATING</th>
+										<th>TOTAL RATINGS</th>
+										<th>PRICE</th>
+										<th>IMG LINKS</th>
+										<th>LAUNCH STATUS</th>
+										<th>BUY</th>
+                    </tr>
+                </thead>
+                </table>
+            </div>
+            <div class="right-table-download">
+                <a href="./poco_main.html"><button>Below Rs.10000</button></a>
+                <a href="./poco_main_10k-25k.html"><button>Rs.10000-Rs.25000</button></a>
+                <a href="./poco_main_26k-50k.html"><button>Rs.26000-Rs.50000</button></a>
+               
+            </div>
+        </div>
+        </div>
+    </div>
+    <script>
+        price ='[{"one": 9,"two": 103,"three": 12,"four": 0}]'
+        
+        var pricedata = JSON.parse(price);
+        for(var i = 0;i < pricedata.length; i++){
+            var xValues = ["<10k","10k-25k","26k-50k",">50k"]
+            var yValues = [pricedata[i].one,pricedata[i].two,pricedata[i].three,pricedata[i].four];
+            var barColors = ["#FF0000", "#FF4500", "#FF6347", "#FF7F50"];
+        
+            new Chart("priceChart", {
+                type: "bar",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Price"
+                }
+            }
+            });
+        }
+        
+        launch_status='[{"Coming_Soon": 6,"Available": 106}]'
+        var launchdata = JSON.parse(launch_status);
+        for(var i = 0;i < launchdata.length; i++){
+            var xValues = ["Coming_Soon","Available"]
+            var yValues = [launchdata[i].Coming_Soon,launchdata[i].Available];
+            var barColors = ["#FF0000", "#FF4500"];
+        
+            new Chart("launchStatusChart", {
+                type: "pie",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Launch status"
+                }
+            }
+            });
+        }
+        rating='[{"one": 0,"two": 112,"three": 0,"four": 0}]'
+        var ratingdata = JSON.parse(rating);
+        for(var i = 0;i < ratingdata.length; i++){
+            var xValues = [">=4.6","4.1 to 4.5","3.6 to 4.0","<=3.5"]
+            var yValues = [ratingdata[i].one,ratingdata[i].two,ratingdata[i].three,ratingdata[i].four];
+            var barColors = ["#FF0000", "#FF4500", "#FF6347", "#FF7F50"];
+        
+            new Chart("ratingChart", {
+                type: "line",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Rating"
+                }
+            }
+            });
+        }
+        </script>
+        <script type="text/javascript">
+        
+            function load() {
+data='[{"Title":"POCO F4 5G (Night Black, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 16.94 cm (6.67 inch) Full HD+ Display","Camera":" 64MP + 8MP + 2MP | 20MP Front Camera","Processor":" 4500 mAh Lithium-ion Polymer Battery","Star Rating":4.4,"Total Rating":"1,821 Ratings & 277 Reviews","Price":33999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l4n2oi80\/mobile\/h\/h\/i\/-original-imagfhuecztmg3gz.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/poco-f4-5g-night-black-256-gb\/p\/itm7fa11cfc34d04?pid=MOBGE853H86PEDVG&lid=LSTMOBGE853H86PEDVGZBCM9U&marketplace=FLIPKART&q=poco&store=tyy%2F4io&srno=s_2_46&otracker=search&otracker1=search&fm=organic&iid=454506ed-ae1a-4688-9999-c5746753916a.MOBGE853H86PEDVG.SEARCH&ppt=None&ppn=None&ssid=ph9gf68swg0000001666101159571&qH=9709638de74d20a5"},{"Title":"POCO F4 5G (Nebula Green, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 16.94 cm (6.67 inch) Full HD+ Display","Camera":" 64MP + 8MP + 2MP | 20MP Front Camera","Processor":" 4500 mAh Lithium-ion Polymer Battery","Star Rating":4.4,"Total Rating":"1,821 Ratings & 277 Reviews","Price":33999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l4n2oi80\/mobile\/i\/a\/x\/-original-imagfhuebkbnnfgj.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/poco-f4-5g-nebula-green-256-gb\/p\/itm9fdea93035f54?pid=MOBGE853BZW5EDQQ&lid=LSTMOBGE853BZW5EDQQYVP3QS&marketplace=FLIPKART&q=poco&store=tyy%2F4io&srno=s_3_58&otracker=search&otracker1=search&fm=organic&iid=25437a72-97d9-4f4e-b4f5-2748874ad84b.MOBGE853BZW5EDQQ.SEARCH&ppt=None&ppn=None&ssid=wjko6w1r9s0000001666101186031&qH=9709638de74d20a5"},{"Title":"POCO F3 GT 5G (Predator Black, 256 GB)","Ram or Rom":"8 GB RAM | 256 GB ROM","Display":" 16.94 cm (6.67 inch) Full HD+ Display","Camera":" 64MP + 8MP + 2MP | 16MP Front Camera","Processor":" 5065 mAh Lithium-ion Polymer Battery","Star Rating":4.3,"Total Rating":"14,623 Ratings & 1,910 Reviews","Price":30999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/krf91u80\/mobile\/i\/f\/m\/f3-gt-mzb09huin-poco-original-imag57hec6wkrk77.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/poco-f3-gt-5g-predator-black-256-gb\/p\/itm5989c5a449916?pid=MOBG4Z5MAJH2HAH7&lid=LSTMOBG4Z5MAJH2HAH7ZIXGPV&marketplace=FLIPKART&q=poco&store=tyy%2F4io&srno=s_5_103&otracker=search&otracker1=search&fm=organic&iid=a011caef-e4e9-4894-92c8-915a41bef6f2.MOBG4Z5MAJH2HAH7.SEARCH&ppt=None&ppn=None&ssid=6yih8x674g0000001666101235831&qH=9709638de74d20a5"},{"Title":"POCO F3 GT 5G (Gunmetal Silver, 256 GB)","Ram or Rom":"8 GB RAM | 256 GB ROM","Display":" 16.94 cm (6.67 inch) Full HD+ Display","Camera":" 64MP + 8MP + 2MP | 16MP Front Camera","Processor":" 5065 mAh Lithium-ion Polymer Battery","Star Rating":4.3,"Total Rating":"14,623 Ratings & 1,910 Reviews","Price":30999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/krf91u80\/mobile\/6\/l\/i\/f3-gt-mzb09c5in-poco-original-imag57hetqwnqaac.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/poco-f3-gt-5g-gunmetal-silver-256-gb\/p\/itm96c80d82a5993?pid=MOBG4Z5MYQTXVHG6&lid=LSTMOBG4Z5MYQTXVHG64FG5TC&marketplace=FLIPKART&q=poco&store=tyy%2F4io&srno=s_5_112&otracker=search&otracker1=search&fm=organic&iid=a011caef-e4e9-4894-92c8-915a41bef6f2.MOBG4Z5MYQTXVHG6.SEARCH&ppt=None&ppn=None&ssid=6yih8x674g0000001666101235831&qH=9709638de74d20a5"},{"Title":"POCO F4 5G (Night Black, 128 GB)","Ram or Rom":"8 GB RAM | 128 GB ROM","Display":" 16.94 cm (6.67 inch) Full HD+ Display","Camera":" 64MP + 8MP + 2MP | 20MP Front Camera","Processor":" 4500 mAh Lithium-ion Polymer Battery","Star Rating":4.3,"Total Rating":"3,312 Ratings & 472 Reviews","Price":29999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l4n2oi80\/mobile\/h\/h\/i\/-original-imagfhuecztmg3gz.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/poco-f4-5g-night-black-128-gb\/p\/itm0508208a368c7?pid=MOBGE8538HZHG2UH&lid=LSTMOBGE8538HZHG2UHSO1V4M&marketplace=FLIPKART&q=poco&store=tyy%2F4io&srno=s_2_37&otracker=search&otracker1=search&fm=organic&iid=454506ed-ae1a-4688-9999-c5746753916a.MOBGE8538HZHG2UH.SEARCH&ppt=None&ppn=None&ssid=ph9gf68swg0000001666101159571&qH=9709638de74d20a5"},{"Title":"POCO F4 5G (Nebula Green, 128 GB)","Ram or Rom":"8 GB RAM | 128 GB ROM","Display":" 16.94 cm (6.67 inch) Full HD+ Display","Camera":" 64MP + 8MP + 2MP | 20MP Front Camera","Processor":" 4500 mAh Lithium-ion Polymer Battery","Star Rating":4.3,"Total Rating":"3,312 Ratings & 472 Reviews","Price":29999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l4n2oi80\/mobile\/i\/a\/x\/-original-imagfhuebkbnnfgj.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/poco-f4-5g-nebula-green-128-gb\/p\/itmae3dc60dfbc3a?pid=MOBGE853R2HGTSZN&lid=LSTMOBGE853R2HGTSZNYLW7AE&marketplace=FLIPKART&q=poco&store=tyy%2F4io&srno=s_3_65&otracker=search&otracker1=search&fm=organic&iid=25437a72-97d9-4f4e-b4f5-2748874ad84b.MOBGE853R2HGTSZN.SEARCH&ppt=None&ppn=None&ssid=wjko6w1r9s0000001666101186031&qH=9709638de74d20a5"},{"Title":"POCO F3 GT 5G (Predator Black, 128 GB)","Ram or Rom":"8 GB RAM | 128 GB ROM","Display":" 16.94 cm (6.67 inch) Full HD+ Display","Camera":" 64MP + 8MP + 2MP | 16MP Front Camera","Processor":" 5065 mAh Lithium-ion Polymer Battery","Star Rating":4.3,"Total Rating":"14,623 Ratings & 1,910 Reviews","Price":28999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/krf91u80\/mobile\/i\/f\/m\/f3-gt-mzb09huin-poco-original-imag57hec6wkrk77.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/poco-f3-gt-5g-predator-black-128-gb\/p\/itm27a5b8bd59601?pid=MOBG4Z5MBD3VMXTF&lid=LSTMOBG4Z5MBD3VMXTFXHIC8A&marketplace=FLIPKART&q=poco&store=tyy%2F4io&srno=s_4_73&otracker=search&otracker1=search&fm=organic&iid=741da604-fc3b-4f61-ab26-9270c68ca164.MOBG4Z5MBD3VMXTF.SEARCH&ppt=None&ppn=None&ssid=97071ei1680000001666101198587&qH=9709638de74d20a5"},{"Title":"POCO F3 GT 5G (Gunmetal Silver, 128 GB)","Ram or Rom":"8 GB RAM | 128 GB ROM","Display":" 16.94 cm (6.67 inch) Full HD+ Display","Camera":" 64MP + 8MP + 2MP | 16MP Front Camera","Processor":" 5065 mAh Lithium-ion Polymer Battery","Star Rating":4.3,"Total Rating":"14,623 Ratings & 1,910 Reviews","Price":28999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/krf91u80\/mobile\/6\/l\/i\/f3-gt-mzb09c5in-poco-original-imag57hetqwnqaac.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/poco-f3-gt-5g-gunmetal-silver-128-gb\/p\/itm532323246b3c4?pid=MOBG4Z5MGSFQPFQK&lid=LSTMOBG4Z5MGSFQPFQKIIKYEA&marketplace=FLIPKART&q=poco&store=tyy%2F4io&srno=s_3_55&otracker=search&otracker1=search&fm=organic&iid=25437a72-97d9-4f4e-b4f5-2748874ad84b.MOBG4Z5MGSFQPFQK.SEARCH&ppt=None&ppn=None&ssid=wjko6w1r9s0000001666101186031&qH=9709638de74d20a5"},{"Title":"POCO F3 GT 5G (Predator Black, 128 GB)","Ram or Rom":"6 GB RAM | 128 GB ROM","Display":" 16.94 cm (6.67 inch) Full HD+ Display","Camera":" 64MP + 8MP + 2MP | 16MP Front Camera","Processor":" 5065 mAh Lithium-ion Polymer Battery","Star Rating":4.3,"Total Rating":"4,642 Ratings & 752 Reviews","Price":28999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/krf91u80\/mobile\/i\/f\/m\/f3-gt-mzb09huin-poco-original-imag57hec6wkrk77.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/poco-f3-gt-5g-predator-black-128-gb\/p\/itmee0c7a72eb381?pid=MOBG4Z5MPHBK44JY&lid=LSTMOBG4Z5MPHBK44JY7724XP&marketplace=FLIPKART&q=poco&store=tyy%2F4io&srno=s_3_60&otracker=search&otracker1=search&fm=organic&iid=25437a72-97d9-4f4e-b4f5-2748874ad84b.MOBG4Z5MPHBK44JY.SEARCH&ppt=None&ppn=None&ssid=wjko6w1r9s0000001666101186031&qH=9709638de74d20a5"},{"Title":"POCO F3 GT 5G (Gunmetal Silver, 128 GB)","Ram or Rom":"6 GB RAM | 128 GB ROM","Display":" 16.94 cm (6.67 inch) Full HD+ Display","Camera":" 64MP + 8MP + 2MP | 16MP Front Camera","Processor":" 5065 mAh Lithium-ion Polymer Battery","Star Rating":4.3,"Total Rating":"4,642 Ratings & 752 Reviews","Price":28999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/krf91u80\/mobile\/6\/l\/i\/f3-gt-mzb09c5in-poco-original-imag57hetqwnqaac.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/poco-f3-gt-5g-gunmetal-silver-128-gb\/p\/itmd54755156f436?pid=MOBG4Z5MVBZ9KZZ6&lid=LSTMOBG4Z5MVBZ9KZZ6EESPKQ&marketplace=FLIPKART&q=poco&store=tyy%2F4io&srno=s_3_72&otracker=search&otracker1=search&fm=organic&iid=25437a72-97d9-4f4e-b4f5-2748874ad84b.MOBG4Z5MVBZ9KZZ6.SEARCH&ppt=None&ppn=None&ssid=wjko6w1r9s0000001666101186031&qH=9709638de74d20a5"},{"Title":"POCO F4 5G (Night Black, 128 GB)","Ram or Rom":"6 GB RAM | 128 GB ROM","Display":" 16.94 cm (6.67 inch) Full HD+ Display","Camera":" 64MP + 8MP + 2MP | 20MP Front Camera","Processor":" 4500 mAh Lithium-ion Polymer Battery","Star Rating":4.3,"Total Rating":"9,081 Ratings & 1,333 Reviews","Price":27999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l4n2oi80\/mobile\/h\/h\/i\/-original-imagfhuecztmg3gz.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/poco-f4-5g-night-black-128-gb\/p\/itmde7b4cceb0e93?pid=MOBGE853HXYJ7R9K&lid=LSTMOBGE853HXYJ7R9KBAM8S5&marketplace=FLIPKART&q=poco&store=tyy%2F4io&srno=s_2_36&otracker=search&otracker1=search&fm=organic&iid=454506ed-ae1a-4688-9999-c5746753916a.MOBGE853HXYJ7R9K.SEARCH&ppt=None&ppn=None&ssid=ph9gf68swg0000001666101159571&qH=9709638de74d20a5"},{"Title":"POCO F4 5G (Nebula Green, 128 GB)","Ram or Rom":"6 GB RAM | 128 GB ROM","Display":" 16.94 cm (6.67 inch) Full HD+ Display","Camera":" 64MP + 8MP + 2MP | 20MP Front Camera","Processor":" 4500 mAh Lithium-ion Polymer Battery","Star Rating":4.3,"Total Rating":"9,081 Ratings & 1,333 Reviews","Price":27999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l4n2oi80\/mobile\/i\/a\/x\/-original-imagfhuebkbnnfgj.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/poco-f4-5g-nebula-green-128-gb\/p\/itmff0d134def305?pid=MOBGE853N5EMEHW7&lid=LSTMOBGE853N5EMEHW74T8TXZ&marketplace=FLIPKART&q=poco&store=tyy%2F4io&srno=s_3_54&otracker=search&otracker1=search&fm=organic&iid=25437a72-97d9-4f4e-b4f5-2748874ad84b.MOBGE853N5EMEHW7.SEARCH&ppt=None&ppn=None&ssid=wjko6w1r9s0000001666101186031&qH=9709638de74d20a5"}]';
+                var mydata = JSON.parse(data);
+                var div = document.getElementById('customers');
+                for(var i = 0;i < mydata.length; i++){
+                    div.innerHTML = div.innerHTML + "<tr><td>"+ mydata[i].Title +"</td>"+
+                                                        "<td>"+ mydata[i]['Ram or Rom'] +"</td>"+
+                                                        "<td>"+ mydata[i].Display +"</td>"+
+                                                        "<td>"+ mydata[i].Camera +"</td>"+
+                                                        "<td>"+ mydata[i].Processor +"</td>"+
+                                                        "<td>"+ mydata[i]['Star Rating']+"</td>"+
+                                                        "<td>"+ mydata[i]['Total Rating']+"</td>"+
+                                                        "<td>"+ mydata[i].Price +"</td>"+
+                                                        "<td><a href="+mydata[i]['Img Url']+">"+ 'Image_Url'+"</a></td>"+
+                                                        "<td>"+ mydata[i]['Launch Status'] +"</td>"+
+                                                        "<td><a href="+mydata[i].Buy+" target='__blank'>"+ 'Buy_Url'+"</a></td>"+
+                                                    "</tr>";
+                }
+            }
+        </script>
+</body>
+</html>

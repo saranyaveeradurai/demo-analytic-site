@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="all_main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <title>flipkart data</title>
+
+</head>
+
+<body onload="load()">
+    <div class="container">
+        <div class="left-table">
+            <ul>
+                <a href="./index.html">
+                    <li class='sidelist' >HOME PAGE</li>
+                </a>
+                <a href="./apple_main.html">
+                    <li class='sidelist' >Apple</li>
+                </a>
+                <a href="./honor_main.html">
+                    <li class='sidelist  active1' >Honor</li>
+                </a>
+                <a href="./infinix_main.html">
+                    <li class='sidelist' >Infinix</li>
+                </a>
+                <a href="./mi_main.html">
+                    <li class='sidelist' >Mi</li>
+                </a>
+                <a href="./oppo_main.html">
+                    <li class='sidelist' >Oppo</li>
+                </a>
+                <a href="./poco_main.html">
+                    <li class='sidelist' >Poco</li>
+                </a>
+                <a href="./realme_main.html">
+                    <li class='sidelist' >Realme</li>
+                </a>
+                <a href="./samsung_main.html">
+                    <li class='sidelist' >Samsung</li>
+                </a>
+                <a href="./vivo_main.html">
+                    <li class='sidelist' >Vivo</li>
+                </a>
+            </ul>
+        </div>
+        <div class="right-table">
+            <div class="right-table-chart">
+                <div class="chartt">
+                <canvas id="priceChart" ></canvas>
+                <canvas id="launchStatusChart" ></canvas>
+                <canvas id="ratingChart" ></canvas>
+                </div>
+            </div>
+            <div class="right-table-table">
+                <table id="customers">
+                    <thead>
+                    <tr>
+                                        <th>TITLE</th>
+										<th>RAM OR ROM</th>
+										<th>DISPLAY</th>
+										<th>CAMERA</th>
+										<th>PROCESSOR</th>
+										<th>STAR RATING</th>
+										<th>TOTAL RATINGS</th>
+										<th>PRICE</th>
+										<th>IMG LINKS</th>
+										<th>LAUNCH STATUS</th>
+										<th>BUY</th>
+                    </tr>
+                </thead>
+                </table>
+            </div>
+            <div class="right-table-download">
+                <a href="./honor_main.html"><button>Below Rs.10000</button></a>
+                <a href="./honor_main_10k-25k.html"><button>Rs.10000-Rs.25000</button></a>
+                <a href="./honor_main_26k-50k.html"><button>Rs.26000-Rs.50000</button></a>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script>
+        price ='[{"one": 36,"two": 120,"three": 24,"four": 0}]'
+        
+        var pricedata = JSON.parse(price);
+        for(var i = 0;i < pricedata.length; i++){
+            var xValues = ["<10k","10k-25k","26k-50k",">50k"]
+            var yValues = [pricedata[i].one,pricedata[i].two,pricedata[i].three,pricedata[i].four];
+            var barColors = ["#FF0000", "#FF4500", "#FF6347", "#FF7F50"];
+        
+            new Chart("priceChart", {
+                type: "bar",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Price"
+                }
+            }
+            });
+        }
+        
+        launch_status='[{"Coming_Soon": 62,"Available": 94}]'
+        var launchdata = JSON.parse(launch_status);
+        for(var i = 0;i < launchdata.length; i++){
+            var xValues = ["Coming_Soon","Available"]
+            var yValues = [launchdata[i].Coming_Soon,launchdata[i].Available];
+            var barColors = ["#FF0000", "#FF4500"];
+        
+            new Chart("launchStatusChart", {
+                type: "pie",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Launch status"
+                }
+            }
+            });
+        }
+        rating='[{"one": 2,"two": 117,"three": 33,"four": 4}]'
+        var ratingdata = JSON.parse(rating);
+        for(var i = 0;i < ratingdata.length; i++){
+            var xValues = [">=4.6","4.1 to 4.5","3.6 to 4.0","<=3.5"]
+            var yValues = [ratingdata[i].one,ratingdata[i].two,ratingdata[i].three,ratingdata[i].four];
+            var barColors = ["#FF0000", "#FF4500", "#FF6347", "#FF7F50"];
+        
+            new Chart("ratingChart", {
+                type: "line",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Rating"
+                }
+            }
+            });
+        }
+        </script>
+        <script type="text/javascript">
+        
+            function load() {
+data='[{"Title":"Nexus 6P (Silver, 64 GB)","Ram or Rom":"3 GB RAM | 64 GB ROM","Display":" 14.48 cm (5.7 inch) Quad HD Display","Camera":" 12.3MP Rear Camera | 8MP Front Camera","Processor":" 3450 mAh Li-Polymer Battery","Star Rating":4.5,"Total Rating":"4,080 Ratings & 858 Reviews","Price":42999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/9\/w\/f\/huawei-nexus-6p-nin-a2-original-imaebyyyhxgugwna.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/nexus-6p-silver-64-gb\/p\/itmevt7zqt3p3qgd?pid=MOBEBZPFZRRPF9WF&lid=LSTMOBEBZPFZRRPF9WFMHLVFL&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_7_151&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=a1546042-0aeb-4159-8be4-f3d9b4d2ad57.MOBEBZPFZRRPF9WF.SEARCH&ppt=None&ppn=None&ssid=wcu1wr0tps0000001665471564945&qH=06e7f41a2ce516a7"},{"Title":"Nexus 6P Special Edition (Gold, 64 GB)","Ram or Rom":"3 GB RAM | 64 GB ROM","Display":" 14.48 cm (5.7 inch) Quad HD Display","Camera":" 12.3MP Rear Camera | 8MP Front Camera","Processor":" 3450 mAh Li-Polymer Battery","Star Rating":4.3,"Total Rating":"1,205 Ratings & 257 Reviews","Price":42998,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/v\/h\/q\/huawei-nexus-6p-special-edition-h1512-original-imaee4n9emzehmfv.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/nexus-6p-special-gold-64-gb\/p\/itmee4ghjzhkvfkz?pid=MOBEE4GHW2KQTVHQ&lid=LSTMOBEE4GHW2KQTVHQIJOC3J&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_5_103&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=f7cee54a-0e89-4b8a-b537-8ae4b834a2bf.MOBEE4GHW2KQTVHQ.SEARCH&ppt=None&ppn=None&ssid=lgrj7b6cao0000001665471484500&qH=06e7f41a2ce516a7"},{"Title":"Nexus 6P Special Edition (Gold, 64 GB)","Ram or Rom":"3 GB RAM | 64 GB ROM","Display":" 14.48 cm (5.7 inch) Quad HD Display","Camera":" 12.3MP Rear Camera | 8MP Front Camera","Processor":" 3450 mAh Li-Polymer Battery","Star Rating":4.3,"Total Rating":"1,205 Ratings & 257 Reviews","Price":42998,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/v\/h\/q\/huawei-nexus-6p-special-edition-h1512-original-imaee4n9emzehmfv.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/nexus-6p-special-gold-64-gb\/p\/itmee4ghjzhkvfkz?pid=MOBEE4GHW2KQTVHQ&lid=LSTMOBEE4GHW2KQTVHQIJOC3J&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_6_130&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=229ee070-46cf-4581-901a-5659757d0807.MOBEE4GHW2KQTVHQ.SEARCH&ppt=None&ppn=None&ssid=j2ko21wvts0000001665471513656&qH=06e7f41a2ce516a7"},{"Title":"Huawei P9 (Titanium Grey, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 128 GB","Display":" 13.21 cm (5.2 inch) Full HD Display","Camera":" 12MP + 12MP | 8MP Front Camera","Processor":" 3000 mAh Battery","Star Rating":4.5,"Total Rating":"831 Ratings & 266 Reviews","Price":39999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/c\/m\/p\/huawei-p9-eva-l09-original-imaehhkafutzttct.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/huawei-p9-titanium-grey-32-gb\/p\/itmeuyd96fpkjnyb?pid=MOBEKQHY6HAAHCMP&lid=LSTMOBEKQHY6HAAHCMPUYLLAF&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_5_99&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=f7cee54a-0e89-4b8a-b537-8ae4b834a2bf.MOBEKQHY6HAAHCMP.SEARCH&ppt=None&ppn=None&ssid=lgrj7b6cao0000001665471484500&qH=06e7f41a2ce516a7"},{"Title":"Huawei P9 (Titanium Grey, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 128 GB","Display":" 13.21 cm (5.2 inch) Full HD Display","Camera":" 12MP + 12MP | 8MP Front Camera","Processor":" 3000 mAh Battery","Star Rating":4.5,"Total Rating":"831 Ratings & 266 Reviews","Price":39999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/c\/m\/p\/huawei-p9-eva-l09-original-imaehhkafutzttct.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/huawei-p9-titanium-grey-32-gb\/p\/itmeuyd96fpkjnyb?pid=MOBEKQHY6HAAHCMP&lid=LSTMOBEKQHY6HAAHCMPUYLLAF&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_6_126&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=229ee070-46cf-4581-901a-5659757d0807.MOBEKQHY6HAAHCMP.SEARCH&ppt=None&ppn=None&ssid=j2ko21wvts0000001665471513656&qH=06e7f41a2ce516a7"},{"Title":"Huawei P9 (Prestige Gold, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 128 GB","Display":" 13.21 cm (5.2 inch) Full HD Display","Camera":" 12MP + 12MP | 8MP Front Camera","Processor":" 3000 mAh Battery","Star Rating":4.5,"Total Rating":"831 Ratings & 266 Reviews","Price":39999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/f\/z\/5\/huawei-p9-eva-l09-original-imaemd9byf6qvxum.jpeg?q=70","Launch Status":"Coming Soon","Buy":"https:\/\/www.flipkart.com\/huawei-p9-prestige-gold-32-gb\/p\/itmeuyd96fpkjnyb?pid=MOBEKQHYZTPZ6FZ5&lid=LSTMOBEKQHYZTPZ6FZ5QITKVH&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_5_101&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=f7cee54a-0e89-4b8a-b537-8ae4b834a2bf.MOBEKQHYZTPZ6FZ5.SEARCH&ppt=None&ppn=None&ssid=lgrj7b6cao0000001665471484500&qH=06e7f41a2ce516a7"},{"Title":"Nexus 6P (Grey, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM","Display":" 14.48 cm (5.7 inch) Quad HD Display","Camera":" 12.3MP Rear Camera | 8MP Front Camera","Processor":" 3450 mAh Li-Polymer Battery","Star Rating":4.5,"Total Rating":"4,080 Ratings & 858 Reviews","Price":39999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/h\/k\/q\/huawei-nexus-6p-nin-a2-original-imaebywuffjkust5.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/nexus-6p-grey-32-gb\/p\/itmevt7zqt3p3qgd?pid=MOBEBZPFWGYVFTFD&lid=LSTMOBEBZPFWGYVFTFDZWZNB7&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_7_155&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=a1546042-0aeb-4159-8be4-f3d9b4d2ad57.MOBEBZPFWGYVFTFD.SEARCH&ppt=None&ppn=None&ssid=wcu1wr0tps0000001665471564945&qH=06e7f41a2ce516a7"},{"Title":"Huawei P9 (Prestige Gold, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 128 GB","Display":" 13.21 cm (5.2 inch) Full HD Display","Camera":" 12MP + 12MP | 8MP Front Camera","Processor":" 3000 mAh Battery","Star Rating":4.5,"Total Rating":"831 Ratings & 266 Reviews","Price":39999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/f\/z\/5\/huawei-p9-eva-l09-original-imaemd9byf6qvxum.jpeg?q=70","Launch Status":"Coming Soon","Buy":"https:\/\/www.flipkart.com\/huawei-p9-prestige-gold-32-gb\/p\/itmeuyd96fpkjnyb?pid=MOBEKQHYZTPZ6FZ5&lid=LSTMOBEKQHYZTPZ6FZ5QITKVH&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_6_128&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=229ee070-46cf-4581-901a-5659757d0807.MOBEKQHYZTPZ6FZ5.SEARCH&ppt=None&ppn=None&ssid=j2ko21wvts0000001665471513656&qH=06e7f41a2ce516a7"},{"Title":"Huawei P9 (Mystic Silver, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 128 GB","Display":" 13.21 cm (5.2 inch) Full HD Display","Camera":" 12MP + 12MP | 8MP Front Camera","Processor":" 3000 mAh Battery","Star Rating":4.5,"Total Rating":"831 Ratings & 266 Reviews","Price":39999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/r\/b\/j\/huawei-p9-eva-l09-original-imaehh48hvsbufwk.jpeg?q=70","Launch Status":"Coming Soon","Buy":"https:\/\/www.flipkart.com\/huawei-p9-mystic-silver-32-gb\/p\/itmeuyd96fpkjnyb?pid=MOBEKQHYS6ZHQRBJ&lid=LSTMOBEKQHYS6ZHQRBJKDIRTT&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_5_100&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=f7cee54a-0e89-4b8a-b537-8ae4b834a2bf.MOBEKQHYS6ZHQRBJ.SEARCH&ppt=None&ppn=None&ssid=lgrj7b6cao0000001665471484500&qH=06e7f41a2ce516a7"},{"Title":"Huawei P9 (Mystic Silver, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 128 GB","Display":" 13.21 cm (5.2 inch) Full HD Display","Camera":" 12MP + 12MP | 8MP Front Camera","Processor":" 3000 mAh Battery","Star Rating":4.5,"Total Rating":"831 Ratings & 266 Reviews","Price":39999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/r\/b\/j\/huawei-p9-eva-l09-original-imaehh48hvsbufwk.jpeg?q=70","Launch Status":"Coming Soon","Buy":"https:\/\/www.flipkart.com\/huawei-p9-mystic-silver-32-gb\/p\/itmeuyd96fpkjnyb?pid=MOBEKQHYS6ZHQRBJ&lid=LSTMOBEKQHYS6ZHQRBJKDIRTT&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_6_127&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=229ee070-46cf-4581-901a-5659757d0807.MOBEKQHYS6ZHQRBJ.SEARCH&ppt=None&ppn=None&ssid=j2ko21wvts0000001665471513656&qH=06e7f41a2ce516a7"},{"Title":"Honor 20 (Sapphire Blue, 128 GB)","Ram or Rom":"6 GB RAM | 128 GB ROM","Display":" 15.9 cm (6.26 inch) Display","Camera":" 48MP + 2MP + 16MP | 32MP Front Camera","Processor":" 3750 mAh Battery","Star Rating":4.4,"Total Rating":"2,625 Ratings & 397 Reviews","Price":35999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/k2jbyq80pkrrdj\/mobile-refurbished\/y\/n\/j\/20-128-a-yal-al00-honor-6-original-imafgh62mxw3ggvg.jpeg?q=70","Launch Status":"Coming Soon","Buy":"https:\/\/www.flipkart.com\/honor-20-sapphire-blue-128-gb\/p\/itmfggkavk6yua6x?pid=MOBFGGKATZVPG7RH&lid=LSTMOBFGGKATZVPG7RH9EXXYB&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_2_25&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=792a675c-a8aa-4ff1-b937-2f2ffcd8b1cd.MOBFGGKATZVPG7RH.SEARCH&ppt=None&ppn=None&ssid=h52qq3kle80000001665471335453&qH=06e7f41a2ce516a7"},{"Title":"Honor 20 (Midnight Black, 128 GB)","Ram or Rom":"6 GB RAM | 128 GB ROM","Display":" 15.9 cm (6.26 inch) Display","Camera":" 48MP + 2MP + 16MP | 32MP Front Camera","Processor":" 3750 mAh Battery","Star Rating":4.4,"Total Rating":"2,625 Ratings & 397 Reviews","Price":35999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/k2jbyq80pkrrdj\/mobile-refurbished\/h\/d\/f\/20-128-b-yal-al00-honor-6-original-imafgh6f5kwega3y.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/honor-20-midnight-black-128-gb\/p\/itmfggkavk6yua6x?pid=MOBFGGKA3ZDTJJZG&lid=LSTMOBFGGKA3ZDTJJZGEJXD8Y&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_2_26&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=792a675c-a8aa-4ff1-b937-2f2ffcd8b1cd.MOBFGGKA3ZDTJJZG.SEARCH&ppt=None&ppn=None&ssid=h52qq3kle80000001665471335453&qH=06e7f41a2ce516a7"},{"Title":"Honor 10 (Midnight Black, 128 GB)","Ram or Rom":"6 GB RAM | 128 GB ROM","Display":" 14.83 cm (5.84 inch) Full HD+ Display","Camera":" 24MP + 16MP | 24MP Front Camera","Processor":" 3400 mAh Lithium Polymer Battery","Star Rating":4.4,"Total Rating":"10,897 Ratings & 1,984 Reviews","Price":35999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/jh0vb0w0\/mobile\/g\/b\/h\/honor-10-v100r001-original-imaf54y3bfrvaaxs.jpeg?q=70","Launch Status":"Coming Soon","Buy":"https:\/\/www.flipkart.com\/honor-10-midnight-black-128-gb\/p\/itmf5fzywgspdndz?pid=MOBF49RYHRSCCGBH&lid=LSTMOBF49RYHRSCCGBHTBSCO4&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_3_60&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=11121fb1-4e34-465a-8e69-5c7126e79871.MOBF49RYHRSCCGBH.SEARCH&ppt=None&ppn=None&ssid=emmne87t1c0000001665471404238&qH=06e7f41a2ce516a7"},{"Title":"Honor 10 (Phantom Blue, 128 GB)","Ram or Rom":"6 GB RAM | 128 GB ROM","Display":" 14.83 cm (5.84 inch) Full HD+ Display","Camera":" 24MP + 16MP | 24MP Front Camera","Processor":" 3400 mAh Lithium Polymer Battery","Star Rating":4.4,"Total Rating":"10,897 Ratings & 1,984 Reviews","Price":35999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/jh0vb0w0\/mobile\/h\/b\/f\/honor-10-v100r001-original-imaf54y5cqgzkjzq.jpeg?q=70","Launch Status":"Coming Soon","Buy":"https:\/\/www.flipkart.com\/honor-10-phantom-blue-128-gb\/p\/itmf5fzywgspdndz?pid=MOBF49RYTGXGGHBF&lid=LSTMOBF49RYTGXGGHBFW2MLHG&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_3_61&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=11121fb1-4e34-465a-8e69-5c7126e79871.MOBF49RYTGXGGHBF.SEARCH&ppt=None&ppn=None&ssid=emmne87t1c0000001665471404238&qH=06e7f41a2ce516a7"},{"Title":"Huawei Mate 20 Pro (Twilight, 128 GB)","Ram or Rom":"6 GB RAM | 128 GB ROM","Display":" 16.23 cm (6.39 inch) Display","Camera":" 24MP Rear Camera","Processor":" 4200 mAh Battery","Star Rating":4.2,"Total Rating":"54 Ratings & 10 Reviews","Price":31999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/k2jbyq80pkrrdj\/mobile-refurbished\/z\/m\/b\/mate-20-pro-128-a-lya-l29-huawei-6-original-imafknh7jv3rcvkd.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/huawei-mate-20-pro-twilight-128-gb\/p\/itmf55c7bc6fd4a1?pid=MOBFKMH4BNGBKN7H&lid=LSTMOBFKMH4BNGBKN7H6ZGMXD&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_7_156&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=a1546042-0aeb-4159-8be4-f3d9b4d2ad57.MOBFKMH4BNGBKN7H.SEARCH&ppt=None&ppn=None&ssid=wcu1wr0tps0000001665471564945&qH=06e7f41a2ce516a7"},{"Title":"Honor 8","Ram or Rom":"4 GB RAM | 32 GB ROM | Expandable Upto 128 GB","Display":" 13.21 cm (5.2 inch) Full HD Display","Camera":" 12MP + 12MP | 8MP Front Camera","Processor":" 3000 mAh Li-Polymer Battery","Star Rating":4.4,"Total Rating":"2,864 Ratings & 692 Reviews","Price":29999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/d\/f\/f\/honor-8-frd-l02-original-imaema4zqyw5q2mv.jpeg?q=70","Launch Status":"Coming Soon","Buy":"https:\/\/www.flipkart.com\/honor-8\/p\/itmeuydakfewgvk3?pid=MOBEM38ESXH5WDFF&lid=LSTMOBEM38ESXH5WDFFUBFZCE&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_1_22&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=a4a20b55-e6d6-4f5d-97e1-c7e99b66bd56.MOBEM38ESXH5WDFF.SEARCH&ppt=None&ppn=None&ssid=n5ghdhxe1c0000001665471078018&qH=06e7f41a2ce516a7"},{"Title":"Honor 8","Ram or Rom":"4 GB RAM | 32 GB ROM | Expandable Upto 128 GB","Display":" 13.21 cm (5.2 inch) Full HD Display","Camera":" 12MP + 12MP | 8MP Front Camera","Processor":" 3000 mAh Li-Polymer Battery","Star Rating":4.4,"Total Rating":"2,864 Ratings & 692 Reviews","Price":29999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/f\/y\/5\/honor-8-frd-l02-original-imaema4zfp56qnbc.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/honor-8\/p\/itmeuydakfewgvk3?pid=MOBEM38ENZEBZFY5&lid=LSTMOBEM38ENZEBZFY5WCBXCD&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_3_62&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=11121fb1-4e34-465a-8e69-5c7126e79871.MOBEM38ENZEBZFY5.SEARCH&ppt=None&ppn=None&ssid=emmne87t1c0000001665471404238&qH=06e7f41a2ce516a7"},{"Title":"Honor 8 Pro (Navy Blue, 128 GB)","Ram or Rom":"6 GB RAM | 128 GB ROM | Expandable Upto 128 GB","Display":" 14.48 cm (5.7 inch) Quad HD Display","Camera":" 12MP + 12MP | 8MP Front Camera","Processor":" 4000 mAh Battery","Star Rating":4.4,"Total Rating":"11,210 Ratings & 2,526 Reviews","Price":29999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/j70sccw0\/mobile\/t\/a\/9\/honor-8-pro-duke-l09-v100r001-original-imaexdy3zvps52qf.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/honor-8-pro-navy-blue-128-gb\/p\/itmeymafrghbjcpf?pid=MOBEWXHMXQVMHTA9&lid=LSTMOBEWXHMXQVMHTA9HRNJOZ&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_2_43&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=792a675c-a8aa-4ff1-b937-2f2ffcd8b1cd.MOBEWXHMXQVMHTA9.SEARCH&ppt=None&ppn=None&ssid=h52qq3kle80000001665471335453&qH=06e7f41a2ce516a7"},{"Title":"Honor 8 Pro (Midnight Black, 128 GB)","Ram or Rom":"6 GB RAM | 128 GB ROM | Expandable Upto 128 GB","Display":" 14.48 cm (5.7 inch) Quad HD Display","Camera":" 12MP + 12MP | 8MP Front Camera","Processor":" 4000 mAh Battery","Star Rating":4.4,"Total Rating":"11,210 Ratings & 2,526 Reviews","Price":29999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/j70sccw0\/mobile\/z\/g\/j\/honor-8-pro-duke-l09-v100r001-original-imaexdy3pcegz3df.jpeg?q=70","Launch Status":"Coming Soon","Buy":"https:\/\/www.flipkart.com\/honor-8-pro-midnight-black-128-gb\/p\/itmeymafrghbjcpf?pid=MOBEWXHMVYBBMZGJ&lid=LSTMOBEWXHMVYBBMZGJSEU6TQ&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_2_42&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=792a675c-a8aa-4ff1-b937-2f2ffcd8b1cd.MOBEWXHMVYBBMZGJ.SEARCH&ppt=None&ppn=None&ssid=h52qq3kle80000001665471335453&qH=06e7f41a2ce516a7"},{"Title":"Honor 8","Ram or Rom":"4 GB RAM | 32 GB ROM | Expandable Upto 128 GB","Display":" 13.21 cm (5.2 inch) Full HD Display","Camera":" 12MP + 12MP | 8MP Front Camera","Processor":" 3000 mAh Li-Polymer Battery","Star Rating":4.4,"Total Rating":"2,864 Ratings & 692 Reviews","Price":29999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/n\/h\/r\/honor-8-frd-l02-original-imaema5yt8yhm3aa.jpeg?q=70","Launch Status":"Coming Soon","Buy":"https:\/\/www.flipkart.com\/honor-8\/p\/itmeuydakfewgvk3?pid=MOBEM38EGGJRGNHR&lid=LSTMOBEM38EGGJRGNHRMCETYN&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_3_63&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=11121fb1-4e34-465a-8e69-5c7126e79871.MOBEM38EGGJRGNHR.SEARCH&ppt=None&ppn=None&ssid=emmne87t1c0000001665471404238&qH=06e7f41a2ce516a7"},{"Title":"Huawei Ascend P6 (White, 8 GB)","Ram or Rom":"2 GB RAM | 8 GB ROM | Expandable Upto 32 GB","Display":" 11.94 cm (4.7 inch) HD Display","Camera":" 8MP Rear Camera | 5MP Front Camera","Processor":" 2000 mAh Battery","Star Rating":4.1,"Total Rating":"72 Ratings & 38 Reviews","Price":26980,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/p\/z\/a\/huawei-ascend-ascend-p6-original-imadpdfauhzmgdkd.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/huawei-ascend-p6-white-8-gb\/p\/itmeuyd4jzxhgn5z?pid=MOBDZ64QAFZPVPZA&lid=LSTMOBDZ64QAFZPVPZAPHMOFW&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_7_150&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=a1546042-0aeb-4159-8be4-f3d9b4d2ad57.MOBDZ64QAFZPVPZA.SEARCH&ppt=None&ppn=None&ssid=wcu1wr0tps0000001665471564945&qH=06e7f41a2ce516a7"},{"Title":"Huawei Ascend P6 (Black, 8 GB)","Ram or Rom":"2 GB RAM | 8 GB ROM | Expandable Upto 32 GB","Display":" 11.94 cm (4.7 inch) HD Display","Camera":" 8MP Rear Camera | 5MP Front Camera","Processor":" 2000 mAh Battery","Star Rating":4.1,"Total Rating":"72 Ratings & 38 Reviews","Price":26980,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/s\/z\/g\/huawei-ascend-ascend-p6-original-imadpdfageznmkcr.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/huawei-ascend-p6-black-8-gb\/p\/itmeuyd4jzxhgn5z?pid=MOBDZ64QFEGYYSZG&lid=LSTMOBDZ64QFEGYYSZGLK59ZN&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_7_154&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=a1546042-0aeb-4159-8be4-f3d9b4d2ad57.MOBDZ64QFEGYYSZG.SEARCH&ppt=None&ppn=None&ssid=wcu1wr0tps0000001665471564945&qH=06e7f41a2ce516a7"},{"Title":"Huawei Ascend P6 (White, 8 GB)","Ram or Rom":"2 GB RAM | 8 GB ROM | Expandable Upto 32 GB","Display":" 11.94 cm (4.7 inch) HD Display","Camera":" 8MP Rear Camera | 5MP Front Camera","Processor":" 2000 mAh Battery","Star Rating":4.1,"Total Rating":"72 Ratings & 38 Reviews","Price":26980,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/p\/z\/a\/huawei-ascend-ascend-p6-original-imadpdfauhzmgdkd.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/huawei-ascend-p6-white-8-gb\/p\/itmeuyd4jzxhgn5z?pid=MOBDZ64QAFZPVPZA&lid=LSTMOBDZ64QAFZPVPZAPHMOFW&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_5_120&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=f7cee54a-0e89-4b8a-b537-8ae4b834a2bf.MOBDZ64QAFZPVPZA.SEARCH&ppt=None&ppn=None&ssid=lgrj7b6cao0000001665471484500&qH=06e7f41a2ce516a7"},{"Title":"Honor 6 Plus (Black, 32 GB)","Ram or Rom":"3 GB RAM | 32 GB ROM | Expandable Upto 128 GB","Display":" 13.97 cm (5.5 inch) Full HD Display","Camera":" 8MP + 8MP | 8MP Front Camera","Processor":" 3600 mAh Battery","Star Rating":3.9,"Total Rating":"752 Ratings & 169 Reviews","Price":26499,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/mobile\/j\/f\/m\/huawei-honor-6-plus-pine-l02-original-imae6a6bkphnvj2t.jpeg?q=70","Launch Status":"Coming Soon","Buy":"https:\/\/www.flipkart.com\/honor-6-plus-black-32-gb\/p\/itmeuyd8azmuvpz6?pid=MOBE5DYUDJFNFJFM&lid=LSTMOBE5DYUDJFNFJFMJAQFOV&marketplace=FLIPKART&q=honor+mobiles&store=tyy%2F4io&srno=s_1_21&otracker=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&otracker1=AS_QueryStore_OrganicAutoSuggest_1_5_na_na_na&fm=organic&iid=a4a20b55-e6d6-4f5d-97e1-c7e99b66bd56.MOBE5DYUDJFNFJFM.SEARCH&ppt=None&ppn=None&ssid=n5ghdhxe1c0000001665471078018&qH=06e7f41a2ce516a7"}]';
+                var mydata = JSON.parse(data);
+                var div = document.getElementById('customers');
+                for(var i = 0;i < mydata.length; i++){
+                    div.innerHTML = div.innerHTML + "<tr><td>"+ mydata[i].Title +"</td>"+
+                                                        "<td>"+ mydata[i]['Ram or Rom'] +"</td>"+
+                                                        "<td>"+ mydata[i].Display +"</td>"+
+                                                        "<td>"+ mydata[i].Camera +"</td>"+
+                                                        "<td>"+ mydata[i].Processor +"</td>"+
+                                                        "<td>"+ mydata[i]['Star Rating']+"</td>"+
+                                                        "<td>"+ mydata[i]['Total Rating']+"</td>"+
+                                                        "<td>"+ mydata[i].Price +"</td>"+
+                                                        "<td><a href="+mydata[i]['Img Url']+">"+ 'Image_Url'+"</a></td>"+
+                                                        "<td>"+ mydata[i]['Launch Status'] +"</td>"+
+                                                        "<td><a href="+mydata[i].Buy+" target='__blank'>"+ 'Buy_Url'+"</a></td>"+
+                                                    "</tr>";
+                }
+            }
+        </script>
+</body>
+</html>

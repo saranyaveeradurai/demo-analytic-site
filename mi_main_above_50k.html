@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="all_main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <title>flipkart data</title>
+
+</head>
+
+<body onload="load()">
+    <div class="container">
+        <div class="left-table">
+            <ul>
+                <a href="./index.html">
+                    <li class='sidelist' >HOME PAGE</li>
+                </a>
+                <a href="./apple_main.html">
+                    <li class='sidelist' >Apple</li>
+                </a>
+                <a href="./honor_main.html">
+                    <li class='sidelist' >Honor</li>
+                </a>
+                <a href="./infinix_main.html">
+                    <li class='sidelist'>Infinix</li>
+                </a>
+                <a href="./mi_main.html">
+                    <li class='sidelist active1' >Mi</li>
+                </a>
+                <a href="./oppo_main.html">
+                    <li class='sidelist' >Oppo</li>
+                </a>
+                <a href="./poco_main.html">
+                    <li class='sidelist' >Poco</li>
+                </a>
+                <a href="./realme_main.html">
+                    <li class='sidelist' >Realme</li>
+                </a>
+                <a href="./samsung_main.html">
+                    <li class='sidelist' >Samsung</li>
+                </a>
+                <a href="./vivo_main.html">
+                    <li class='sidelist' >Vivo</li>
+                </a>
+            </ul>
+        </div>
+        <div class="right-table">
+            <div class="right-table-chart">
+                <div class="chartt">
+                <canvas id="priceChart" ></canvas>
+                <canvas id="launchStatusChart" ></canvas>
+                <canvas id="ratingChart" ></canvas>
+                </div>
+            </div>
+            <div class="right-table-table">
+                <table id="customers">
+                    <thead>
+                    <tr>
+                                        <th>TITLE</th>
+										<th>RAM OR ROM</th>
+										<th>DISPLAY</th>
+										<th>CAMERA</th>
+										<th>PROCESSOR</th>
+										<th>STAR RATING</th>
+										<th>TOTAL RATINGS</th>
+										<th>PRICE</th>
+										<th>IMG LINKS</th>
+										<th>LAUNCH STATUS</th>
+										<th>BUY</th>
+                    </tr>
+                </thead>
+                </table>
+            </div>
+            <div class="right-table-download">
+                <div class="right-table-download">
+                    <a href="./mi_main.html"><button>Below Rs.10000</button></a>
+                    <a href="./mi_main_10k-25k.html"><button>Rs.10000-Rs.25000</button></a>
+                    <a href="./mi_main_26k-50k.html"><button>Rs.26000-Rs.50000</button></a>
+                    <a href="./mi_main_above_50k.html"><button>Above Rs.50000</button></a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script>
+        price ='[{"one": 115,"two": 316,"three": 53,"four": 6}]'
+        
+        var pricedata = JSON.parse(price);
+        for(var i = 0;i < pricedata.length; i++){
+            var xValues = ["<10k","10k-25k","26k-50k",">50k"]
+            var yValues = [pricedata[i].one,pricedata[i].two,pricedata[i].three,pricedata[i].four];
+            var barColors = ["#FF0000", "#FF4500", "#FF6347", "#FF7F50"];
+        
+            new Chart("priceChart", {
+                type: "bar",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Price"
+                }
+            }
+            });
+        }
+        
+        launch_status='[{"Coming_Soon": 147,"Available": 284}]'
+        var launchdata = JSON.parse(launch_status);
+        for(var i = 0;i < launchdata.length; i++){
+            var xValues = ["Coming_Soon","Available"]
+            var yValues = [launchdata[i].Coming_Soon,launchdata[i].Available];
+            var barColors = ["#FF0000", "#FF4500"];
+        
+            new Chart("launchStatusChart", {
+                type: "pie",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Launch status"
+                }
+            }
+            });
+        }
+        rating='[{"one": 3,"two": 412,"three": 16,"four": 0}]'
+        var ratingdata = JSON.parse(rating);
+        for(var i = 0;i < ratingdata.length; i++){
+            var xValues = [">=4.6","4.1 to 4.5","3.6 to 4.0","<=3.5"]
+            var yValues = [ratingdata[i].one,ratingdata[i].two,ratingdata[i].three,ratingdata[i].four];
+            var barColors = ["#FF0000", "#FF4500", "#FF6347", "#FF7F50"];
+        
+            new Chart("ratingChart", {
+                type: "line",
+                data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                data: yValues
+                }]
+            },
+            options: {
+                legend: {display: false},
+                title: {
+                    display: true,
+                    text: "Rating"
+                }
+            }
+            });
+        }
+        </script>
+        <script type="text/javascript">
+        
+            function load() {
+data='[{"Title":"Xiaomi 12 Pro 5G (Opera Mauve, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 17.09 cm (6.73 inch) Full HD+ AMOLED Display","Camera":" 50MP Rear Camera","Processor":" 4600 mAh Battery","Star Rating":4.2,"Total Rating":"98 Ratings & 14 Reviews","Price":67499,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l2p23rk0\/mobile\/b\/n\/9\/12-pro-5g-2201122g-mi-original-imagdz7rs8qfakcb.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/xiaomi-12-pro-5g-opera-mauve-256-gb\/p\/itm4e017bacc4e75?pid=MOBGDZ7XXB7RSNMF&lid=LSTMOBGDZ7XXB7RSNMF4O3GBV&marketplace=FLIPKART&store=tyy%2F4io&srno=b_3_50&otracker=nmenu_sub_Electronics_0_Mi&fm=organic&iid=a2a93fce-8cd8-4d00-9759-deecde8033e4.MOBGDZ7XXB7RSNMF.SEARCH&ppt=None&ppn=None&ssid=g6ped0916o0000001666099607287"},{"Title":"Xiaomi 12 Pro 5G (Couture Blue, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 17.09 cm (6.73 inch) Full HD+ AMOLED Display","Camera":" 50MP Rear Camera","Processor":" 4600 mAh Battery","Star Rating":4.2,"Total Rating":"98 Ratings & 14 Reviews","Price":63999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l2p23rk0\/mobile\/s\/5\/w\/12-pro-5g-2201122g-mi-original-imagdz78yqnz5fpt.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/xiaomi-12-pro-5g-couture-blue-256-gb\/p\/itm4e017bacc4e75?pid=MOBGDZ895FVSKXZU&lid=LSTMOBGDZ895FVSKXZUTUXVRL&marketplace=FLIPKART&store=tyy%2F4io&srno=b_17_399&otracker=nmenu_sub_Electronics_0_Mi&fm=organic&iid=95bf35af-ee62-414e-bb12-1d6218b924f1.MOBGDZ895FVSKXZU.SEARCH&ppt=None&ppn=None&ssid=h2hick8z1s0000001666100018794"},{"Title":"Mi 10 (Twilight Grey, 256 GB)","Ram or Rom":"8 GB RAM | 256 GB ROM","Display":" 16.94 cm (6.67 inch) Display","Camera":" 108MP + 13MP + 2MP + 2MP | 20MP Front Camera","Processor":" 4780 mAh Battery","Star Rating":4.1,"Total Rating":"333 Ratings & 38 Reviews","Price":59999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kdxfc7k0\/mobile\/6\/f\/h\/mi-10-mzb9044in-original-imafuq92ausjrxaz.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/mi-10-twilight-grey-256-gb\/p\/itmcfd22f3987f31?pid=MOBFRXQ62Y4YZANP&lid=LSTMOBFRXQ62Y4YZANPAJSCLE&marketplace=FLIPKART&store=tyy%2F4io&srno=b_16_375&otracker=nmenu_sub_Electronics_0_Mi&fm=organic&iid=c585c2f3-7cd8-4272-8d92-ec3eb43939f5.MOBFRXQ62Y4YZANP.SEARCH&ppt=None&ppn=None&ssid=manq62in5c0000001666099996632"},{"Title":"Mi 10 (Coral Green, 256 GB)","Ram or Rom":"8 GB RAM | 256 GB ROM","Display":" 16.94 cm (6.67 inch) Display","Camera":" 108MP + 13MP + 2MP + 2MP | 20MP Front Camera","Processor":" 4780 mAh Battery","Star Rating":4.1,"Total Rating":"333 Ratings & 38 Reviews","Price":54999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kdxfc7k0\/mobile\/c\/k\/b\/mi-10-mzb8923in-original-imafuq8sjfjuj3gv.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/mi-10-coral-green-256-gb\/p\/itmb5dac1e20390c?pid=MOBFRXYADQEXBCKB&lid=LSTMOBFRXYADQEXBCKBGDX1QA&marketplace=FLIPKART&store=tyy%2F4io&srno=b_17_398&otracker=nmenu_sub_Electronics_0_Mi&fm=organic&iid=95bf35af-ee62-414e-bb12-1d6218b924f1.MOBFRXYADQEXBCKB.SEARCH&ppt=None&ppn=None&ssid=h2hick8z1s0000001666100018794"},{"Title":"Mi 10 (Twilight Grey, 128 GB)","Ram or Rom":"8 GB RAM | 128 GB ROM","Display":" 16.94 cm (6.67 inch) Display","Camera":" 108MP + 13MP + 2MP + 2MP | 20MP Front Camera","Processor":" 4780 mAh Battery","Star Rating":4.1,"Total Rating":"333 Ratings & 38 Reviews","Price":54999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/kdxfc7k0\/mobile\/6\/f\/h\/mi-10-mzb9044in-original-imafuq92ausjrxaz.jpeg?q=70","Launch Status":"Coming Soon","Buy":"https:\/\/www.flipkart.com\/mi-10-twilight-grey-128-gb\/p\/itm64023f396f447?pid=MOBFRXQ6ZDANU6FH&lid=LSTMOBFRXQ6ZDANU6FHBAM6J8&marketplace=FLIPKART&store=tyy%2F4io&srno=b_16_361&otracker=nmenu_sub_Electronics_0_Mi&fm=organic&iid=c585c2f3-7cd8-4272-8d92-ec3eb43939f5.MOBFRXQ6ZDANU6FH.SEARCH&ppt=None&ppn=None&ssid=manq62in5c0000001666099996632"},{"Title":"Xiaomi 12 Pro 5G (Noir Black, 256 GB)","Ram or Rom":"12 GB RAM | 256 GB ROM","Display":" 17.09 cm (6.73 inch) Full HD+ AMOLED Display","Camera":" 50MP Rear Camera","Processor":" 4600 mAh Battery","Star Rating":4.2,"Total Rating":"98 Ratings & 14 Reviews","Price":53999,"Img Url":"https:\/\/rukminim1.flixcart.com\/image\/312\/312\/l2p23rk0\/mobile\/v\/w\/m\/12-pro-5g-2201122g-mi-original-imagdz7fzeqhs54b.jpeg?q=70","Launch Status":"available","Buy":"https:\/\/www.flipkart.com\/xiaomi-12-pro-5g-noir-black-256-gb\/p\/itm4e017bacc4e75?pid=MOBGDZ84RS67ZTEP&lid=LSTMOBGDZ84RS67ZTEPG9DJNX&marketplace=FLIPKART&store=tyy%2F4io&srno=b_5_103&otracker=nmenu_sub_Electronics_0_Mi&fm=organic&iid=4179c2db-9681-4b41-a42c-e8bcc4a72366.MOBGDZ84RS67ZTEP.SEARCH&ppt=None&ppn=None&ssid=xwn7p1p01c0000001666099686079"}]';
+                var mydata = JSON.parse(data);
+                var div = document.getElementById('customers');
+                for(var i = 0;i < mydata.length; i++){
+                    div.innerHTML = div.innerHTML + "<tr><td>"+ mydata[i].Title +"</td>"+
+                                                        "<td>"+ mydata[i]['Ram or Rom'] +"</td>"+
+                                                        "<td>"+ mydata[i].Display +"</td>"+
+                                                        "<td>"+ mydata[i].Camera +"</td>"+
+                                                        "<td>"+ mydata[i].Processor +"</td>"+
+                                                        "<td>"+ mydata[i]['Star Rating']+"</td>"+
+                                                        "<td>"+ mydata[i]['Total Rating']+"</td>"+
+                                                        "<td>"+ mydata[i].Price +"</td>"+
+                                                        "<td><a href="+mydata[i]['Img Url']+">"+ 'Image_Url'+"</a></td>"+
+                                                        "<td>"+ mydata[i]['Launch Status'] +"</td>"+
+                                                        "<td><a href="+mydata[i].Buy+" target='__blank'>"+ 'Buy_Url'+"</a></td>"+
+                                                    "</tr>";
+                }
+            }
+        </script>
+</body>
+</html>
